@@ -1,24 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tilsmee – persönliche KI und WatchFace Studio.">
-  <title>Tilsmee | Deine persönliche KI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tilsmee – dein kompetenter KI-Assistent und Tilsmee WatchFace Studio.">
+  <title>Tilsmee | Dein kompetenter KI-Assistent</title>
+  <link rel="icon" href="assets/tilsmee-emblem.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="splash" id="splash">
+    <img src="assets/tilsmee-emblem.png" alt="">
+    <strong>TILSMEE</strong>
+    <span>System wird gestartet</span>
+  </div>
+
+  <canvas id="particles" aria-hidden="true"></canvas>
+
   <header class="site-header">
     <a class="brand" href="#start" aria-label="Tilsmee Startseite">
-      <span class="brand-icon">🧠</span>
+      <img src="assets/tilsmee-emblem.png" alt="">
       <span>Tilsmee</span>
     </a>
 
-    <button class="menu-button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+    <button class="menu-button" type="button" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
     <nav class="navigation" aria-label="Hauptnavigation">
       <a href="#start">Start</a>
-      <a href="#ueber">Über Tilsmee</a>
+      <a href="#tilsmee">Tilsmee</a>
       <a href="#watchface">WatchFace Studio</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#kontakt">Kontakt</a>
@@ -27,80 +38,92 @@
 
   <main>
     <section class="hero" id="start">
-      <div class="hero-glow"></div>
-      <div class="hero-content">
-        <div class="brain-wrap" aria-hidden="true">
-          <div class="brain-core">🧠</div>
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
+
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">PERSÖNLICHE KI · SOFTWARE · SMARTWATCH</p>
+          <h1>Tilsmee verbindet <span>Menschen und Technik.</span></h1>
+          <p class="lead">
+            Dein persönlicher KI-Assistent für Projekte, Wissen, Sprache und künftig
+            auch für Computer, Smartphone und Smartwatch.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tilsmee">Tilsmee kennenlernen</a>
+            <a class="button ghost" href="#watchface">WatchFace Studio ansehen</a>
+          </div>
+          <div class="development-status">
+            <span class="status-dot"></span>
+            <div>
+              <strong>Aktiver Entwicklungsstatus</strong>
+              <small>Tilsmee wächst Schritt für Schritt.</small>
+            </div>
+          </div>
         </div>
-        <p class="eyebrow">PERSÖNLICHE KI · SMARTWATCH · SOFTWARE</p>
-        <h1>Willkommen bei <span>Tilsmee</span></h1>
-        <p class="hero-text">
-          Eine persönliche KI, die dich kennt, deine Projekte begleitet und künftig
-          auf Computer, Smartphone und Smartwatch verfügbar sein soll.
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="#ueber">Tilsmee kennenlernen</a>
-          <a class="button secondary" href="#watchface">WatchFace Studio</a>
+
+        <div class="hero-logo reveal">
+          <div class="logo-aura"></div>
+          <img src="assets/tilsmee-logo.png" alt="Tilsmee – Dein kompetenter KI-Assistent">
         </div>
-        <p class="status"><span></span> Tilsmee befindet sich in Entwicklung</p>
       </div>
     </section>
 
-    <section class="section" id="ueber">
-      <div class="section-heading">
-        <p class="eyebrow">DIE IDEE</p>
-        <h2>Mehr als nur ein Assistent</h2>
+    <section class="section intro" id="tilsmee">
+      <div class="section-heading reveal">
+        <p class="eyebrow">DIE VISION</p>
+        <h2>Eine KI, die nicht nur antwortet, sondern dich begleitet.</h2>
         <p>
-          Tilsmee soll Sprache, Wissen, Erinnerungen, Projekte und Geräte in einer
-          klaren, persönlichen Oberfläche zusammenführen.
+          Tilsmee soll deine Arbeitsweise verstehen, Projekte zusammenhalten und dir
+          komplizierte Technik so einfach wie möglich zugänglich machen.
         </p>
       </div>
 
-      <div class="card-grid">
-        <article class="card">
-          <span class="card-icon">💬</span>
-          <h3>Natürliche Kommunikation</h3>
-          <p>Schreiben und sprechen, ohne komplizierte Befehle oder technische Umwege.</p>
+      <div class="feature-cards">
+        <article class="feature-card reveal">
+          <span class="number">01</span>
+          <h3>Persönlich</h3>
+          <p>Eine KI, die deine Projekte, Entscheidungen und bevorzugte Arbeitsweise berücksichtigt.</p>
         </article>
-        <article class="card">
-          <span class="card-icon">🧩</span>
-          <h3>Persönliche Projekte</h3>
-          <p>Wissen, Arbeitsstände und Ideen bleiben strukturiert miteinander verbunden.</p>
+        <article class="feature-card reveal">
+          <span class="number">02</span>
+          <h3>Natürlich</h3>
+          <p>Kommunikation über Text und Sprache, ohne unnötige technische Hürden.</p>
         </article>
-        <article class="card">
-          <span class="card-icon">🔒</span>
-          <h3>Kontrolle und Datenschutz</h3>
-          <p>Eine transparente Lösung mit klarer Kontrolle über Funktionen und Daten.</p>
+        <article class="feature-card reveal">
+          <span class="number">03</span>
+          <h3>Erweiterbar</h3>
+          <p>Eine gemeinsame Plattform für Desktop, Smartphone, Smartwatch und neue Module.</p>
         </article>
       </div>
     </section>
 
-    <section class="section feature-section" id="watchface">
-      <div class="feature-copy">
+    <section class="section watchface-section" id="watchface">
+      <div class="watchface-copy reveal">
         <p class="eyebrow">TILSMEE WATCHFACE STUDIO</p>
-        <h2>Eigene Watchfaces gestalten</h2>
+        <h2>Eigene Watchfaces. Eigene Regeln.</h2>
         <p>
-          Das geplante Studio soll Hintergrundbilder, Uhrzeit, Datum, Wetter,
-          Schritte, Akku und weitere Elemente als frei positionierbare Ebenen verbinden.
+          Das Tilsmee WatchFace Studio soll aus Bildern echte, funktionale Zifferblätter
+          machen. Uhrzeit, Datum, Wetter, Akku, Schritte und weitere Elemente werden als
+          frei bearbeitbare Ebenen aufgebaut.
         </p>
-        <ul>
-          <li>Visuelle Vorschau am Computer</li>
-          <li>Bearbeitbare Ebenen und Positionen</li>
-          <li>Import eigener Grafiken</li>
-          <li>Späterer Export für kompatible Smartwatches</li>
-        </ul>
+        <div class="check-grid">
+          <span>Visuelle PC-Vorschau</span>
+          <span>Frei positionierbare Elemente</span>
+          <span>Eigene Bilder und Designs</span>
+          <span>Export für kompatible Smartwatches</span>
+        </div>
       </div>
 
-      <div class="watch-preview" aria-label="Vorschau eines Tilsmee Watchfaces">
-        <div class="watch-case">
-          <div class="watch-screen">
-            <div class="mini-brain">🧠</div>
+      <div class="watch-stage reveal">
+        <div class="watch-shadow"></div>
+        <div class="watch">
+          <div class="watch-inner">
+            <img src="assets/tilsmee-emblem.png" alt="">
             <div class="watch-time">10:09</div>
-            <div class="watch-date">DO · 05. AUG</div>
-            <div class="watch-values">
-              <span>♥ 72</span>
-              <span>⚡ 84%</span>
-              <span>👟 6.248</span>
+            <div class="watch-date">05. AUGUST 2026</div>
+            <div class="watch-data">
+              <span>♥ 72</span><span>⚡ 84%</span><span>👟 6248</span>
             </div>
             <strong>TILSMEE</strong>
           </div>
@@ -108,23 +131,37 @@
       </div>
     </section>
 
-    <section class="section" id="roadmap">
-      <div class="section-heading">
+    <section class="section roadmap" id="roadmap">
+      <div class="section-heading reveal">
         <p class="eyebrow">ROADMAP</p>
-        <h2>Der Weg nach vorn</h2>
+        <h2>Von der Idee zum Tilsmee-Ökosystem.</h2>
       </div>
-      <div class="timeline">
-        <article><span>01</span><div><h3>Homepage</h3><p>Öffentliche Basis für Projekt, Entwicklung und Dokumentation.</p></div></article>
-        <article><span>02</span><div><h3>WatchFace Studio</h3><p>Editor, Vorschau, Ebenenverwaltung und Exportworkflow.</p></div></article>
-        <article><span>03</span><div><h3>Persönliche KI</h3><p>Sprache, Wissen, Projekte und Geräte in einer Anwendung.</p></div></article>
+
+      <div class="roadmap-list">
+        <article class="roadmap-item reveal">
+          <span>01</span>
+          <div><h3>Homepage und Marke</h3><p>Öffentlicher Auftritt, Dokumentation und zentrale Projektplattform.</p></div>
+          <small>AKTIV</small>
+        </article>
+        <article class="roadmap-item reveal">
+          <span>02</span>
+          <div><h3>WatchFace Studio</h3><p>Editor, Vorschau, Ebenen, Import und späterer Export.</p></div>
+          <small>IN ENTWICKLUNG</small>
+        </article>
+        <article class="roadmap-item reveal">
+          <span>03</span>
+          <div><h3>Persönliche KI</h3><p>Sprache, Wissen, Projekte und Geräte in einer Anwendung.</p></div>
+          <small>GEPLANT</small>
+        </article>
       </div>
     </section>
 
-    <section class="section contact-section" id="kontakt">
-      <p class="eyebrow">KONTAKT</p>
-      <h2>Tilsmee wächst Schritt für Schritt.</h2>
-      <p>Weitere Informationen, Downloads und Entwicklungsstände folgen auf dieser Seite.</p>
-      <a class="button primary" href="mailto:kontakt@tilsmee.de">E-Mail schreiben</a>
+    <section class="section contact reveal" id="kontakt">
+      <img src="assets/tilsmee-emblem.png" alt="">
+      <p class="eyebrow">TILSMEE</p>
+      <h2>Die Entwicklung hat begonnen.</h2>
+      <p>Neue Funktionen, erste Downloads und weitere Einblicke folgen direkt auf dieser Seite.</p>
+      <a class="button primary" href="mailto:kontakt@tilsmee.de">Kontakt aufnehmen</a>
     </section>
   </main>
 
