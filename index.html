@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#02070d">
-  <meta name="description" content="Tilsmee – persönliche KI, Live-Watchface und WatchFace Studio.">
-  <title>Tilsmee | Dein kompetenter KI-Assistent</title>
+  <meta name="description" content="Tilsmee AI – dein persönlicher KI-Assistent auf jedem Gerät.">
+  <title>Tilsmee AI | Dein persönlicher KI-Assistent</title>
   <link rel="icon" href="tilsmee-emblem.png">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,8 +15,8 @@
       <img src="tilsmee-emblem.png" alt="">
       <span class="core-dot"></span>
     </div>
-    <strong>TILSMEE</strong>
-    <small>System wird gestartet</small>
+    <strong><span class="silver">TILS</span><span class="blue">MEE</span></strong>
+    <small>Dein persönlicher KI-Assistent</small>
   </div>
 
   <header class="topbar">
@@ -25,7 +25,7 @@
         <img src="tilsmee-emblem.png" alt="">
         <span class="core-dot small"></span>
       </span>
-      <span>Tilsmee</span>
+      <span class="brand-word"><span class="silver">TILS</span><span class="blue">MEE</span></span>
     </a>
 
     <nav class="desktop-nav" aria-label="Hauptnavigation">
@@ -38,19 +38,20 @@
     <a class="top-cta" href="#kontakt">Kontakt</a>
   </header>
 
-  <main class="slides" id="slides">
-    <!-- SLIDE 1 -->
+  <main class="slides">
     <section class="slide hero-slide" id="start">
       <div class="ambient ambient-a"></div>
       <div class="ambient ambient-b"></div>
 
       <div class="hero-copy reveal">
-        <p class="eyebrow">LIVE · PERSÖNLICH · TILSMEE</p>
-        <h1>Deine Zeit.<br><span>Dein System.</span></h1>
+        <p class="eyebrow">PERSÖNLICHE KI · SOFTWARE · SMARTWATCH</p>
+        <h1><span class="silver">TILSMEE</span> <span class="blue">AI</span></h1>
+        <p class="hero-slogan">Dein persönlicher KI-Assistent. Auf jedem Gerät.</p>
         <p class="lead">
-          Eine funktionierende Tilsmee-Uhr direkt im Browser – mit aktueller Uhrzeit,
-          Datum, Wetter und Gerätestatus.
+          Tilsmee verbindet Projekte, Wissen und Geräte zu einem persönlichen System,
+          das dich im Alltag gezielt unterstützt.
         </p>
+
         <div class="hero-actions">
           <a class="button primary" href="#studio">WatchFace Studio ansehen</a>
           <button class="button secondary" id="weatherButton" type="button">Wetter aktualisieren</button>
@@ -64,9 +65,14 @@
             <div class="watch-crown"></div>
             <div class="watch-screen">
               <div class="watch-top">
-                <span class="watch-weather-icon" id="weatherIcon">◌</span>
-                <span id="temperature">--°</span>
-                <span id="battery">--%</span>
+                <div class="weather-top">
+                  <span class="watch-weather-icon" id="weatherIcon">◌</span>
+                  <span id="temperature">--°</span>
+                </div>
+                <div class="battery-top">
+                  <span>⚡</span>
+                  <span id="battery">--%</span>
+                </div>
               </div>
 
               <div class="watch-logo-wrap">
@@ -83,12 +89,24 @@
               <div class="watch-weather" id="weatherText">Wetter wird geladen</div>
 
               <div class="watch-metrics">
-                <div><span>♥</span><strong id="heartRate">72</strong><small>BPM</small></div>
-                <div><span>◉</span><strong id="steps">6248</strong><small>SCHRITTE</small></div>
-                <div><span>↯</span><strong id="watchBattery">84</strong><small>AKKU</small></div>
+                <div>
+                  <span>♥</span>
+                  <strong id="heartRate">72</strong>
+                  <small>BPM</small>
+                </div>
+                <div>
+                  <span>◉</span>
+                  <strong id="steps">0</strong>
+                  <small>SCHRITTE</small>
+                </div>
+                <div>
+                  <span>⚡</span>
+                  <strong id="watchBattery">--%</strong>
+                  <small>AKKU</small>
+                </div>
               </div>
 
-              <div class="watch-brand">TILSMEE</div>
+              <div class="watch-brand"><span class="silver">TILS</span><span class="blue">MEE</span></div>
             </div>
           </div>
         </div>
@@ -100,14 +118,13 @@
       </a>
     </section>
 
-    <!-- SLIDE 2 -->
     <section class="slide content-slide" id="idee">
       <div class="section-copy reveal">
         <p class="eyebrow">DIE IDEE</p>
         <h2>Eine KI, die dich und deine Projekte zusammenbringt.</h2>
         <p>
-          Tilsmee soll nicht wie ein gewöhnliches Programm wirken. Es soll verstehen,
-          was du gerade machst, wo du aufgehört hast und was als Nächstes sinnvoll ist.
+          Tilsmee soll verstehen, woran du arbeitest, wo du aufgehört hast
+          und was als Nächstes sinnvoll ist.
         </p>
       </div>
 
@@ -127,11 +144,13 @@
       </div>
     </section>
 
-    <!-- SLIDE 3 -->
     <section class="slide studio-slide" id="studio">
       <div class="studio-preview reveal">
         <div class="mock-window">
-          <div class="mock-topbar"><span></span><span></span><span></span><strong>Tilsmee WatchFace Studio</strong></div>
+          <div class="mock-topbar">
+            <span></span><span></span><span></span>
+            <strong>Tilsmee WatchFace Studio</strong>
+          </div>
           <div class="mock-body">
             <aside>
               <b>Ebenen</b>
@@ -144,7 +163,10 @@
             </aside>
             <div class="mock-canvas">
               <div class="mini-watch">
-                <img src="tilsmee-emblem.png" alt="">
+                <div class="mini-logo">
+                  <img src="tilsmee-emblem.png" alt="">
+                  <span class="core-dot mini-core"></span>
+                </div>
                 <strong>10:09</strong>
                 <small>05. AUGUST 2026</small>
               </div>
@@ -169,7 +191,6 @@
       </div>
     </section>
 
-    <!-- SLIDE 4 -->
     <section class="slide roadmap-slide" id="roadmap">
       <div class="section-copy reveal">
         <p class="eyebrow">ROADMAP</p>
@@ -195,14 +216,13 @@
       </div>
     </section>
 
-    <!-- SLIDE 5 -->
     <section class="slide contact-slide" id="kontakt">
       <div class="contact-card reveal">
         <div class="contact-logo">
           <img src="tilsmee-emblem.png" alt="">
           <span class="core-dot"></span>
         </div>
-        <p class="eyebrow">TILSMEE</p>
+        <p class="eyebrow">TILSMEE AI</p>
         <h2>Die Entwicklung läuft.</h2>
         <p>Neue Funktionen, Tests und Fortschritte werden hier sichtbar gemacht.</p>
         <a class="button primary" href="mailto:kontakt@tilsmee.de">Kontakt aufnehmen</a>

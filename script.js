@@ -10,7 +10,6 @@ const revealObserver = new IntersectionObserver(entries => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.14 });
-
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 function updateClock() {
@@ -75,7 +74,7 @@ async function fetchWeather(lat, lon, locationLabel = '') {
     document.getElementById('weatherIcon').textContent = icon;
     document.getElementById('weatherText').textContent = `${text} · ${temp} °C`;
     status.textContent = locationLabel ? `Wetter für ${locationLabel}` : 'Wetter anhand deines Standorts';
-  } catch (error) {
+  } catch {
     document.getElementById('weatherText').textContent = 'Wetter nicht verfügbar';
     status.textContent = 'Wetter konnte nicht geladen werden.';
   }
@@ -102,34 +101,44 @@ async function loadBattery() {
   const batteryText = document.getElementById('battery');
   const watchBattery = document.getElementById('watchBattery');
 
+  const applyBattery = value => {
+    batteryText.textContent = `${value}%`;
+    watchBattery.textContent = `${value}%`;
+  };
+
   try {
     if ('getBattery' in navigator) {
       const battery = await navigator.getBattery();
-      const update = () => {
-        const value = Math.round(battery.level * 100);
-        batteryText.textContent = `${value}%`;
-        watchBattery.textContent = value;
-      };
+      const update = () => applyBattery(Math.round(battery.level * 100));
       update();
       battery.addEventListener('levelchange', update);
     } else {
-      batteryText.textContent = '84%';
-      watchBattery.textContent = '84';
+      applyBattery(84);
     }
   } catch {
-    batteryText.textContent = '84%';
-    watchBattery.textContent = '84';
+    applyBattery(84);
   }
 }
 loadBattery();
 
-let stepValue = 6248;
-setInterval(() => {
-  if (document.visibilityState === 'visible' && Math.random() > 0.65) {
-    stepValue += Math.floor(Math.random() * 3) + 1;
-    document.getElementById('steps').textContent = stepValue.toLocaleString('de-DE');
+const stepsElement = document.getElementById('steps');
+const stepDuration = 3000;
+const maxSteps = 12345;
+let stepStart = performance.now();
+
+function animateSteps(now) {
+  const elapsed = (now - stepStart) % stepDuration;
+  const progress = elapsed / stepDuration;
+  const eased = 1 - Math.pow(1 - progress, 3);
+  const value = Math.floor(maxSteps * eased);
+  stepsElement.textContent = value.toLocaleString('de-DE');
+
+  if (elapsed < 20 && now - stepStart > stepDuration) {
+    stepStart = now;
   }
-}, 5000);
+  requestAnimationFrame(animateSteps);
+}
+requestAnimationFrame(animateSteps);
 
 const watchTilt = document.getElementById('watchTilt');
 const watchShell = watchTilt.querySelector('.watch-shell');
@@ -138,7 +147,7 @@ watchTilt.addEventListener('pointermove', event => {
   const rect = watchTilt.getBoundingClientRect();
   const x = (event.clientX - rect.left) / rect.width - 0.5;
   const y = (event.clientY - rect.top) / rect.height - 0.5;
-  watchShell.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(8px)`;
+  watchShell.style.transform = `rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateZ(8px)`;
 });
 
 watchTilt.addEventListener('pointerleave', () => {
