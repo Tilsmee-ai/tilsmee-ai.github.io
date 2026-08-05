@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tilsmee – persönliche KI und WatchFace Studio.">
+  <title>Tilsmee | Deine persönliche KI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#start" aria-label="Tilsmee Startseite">
+      <span class="brand-icon">🧠</span>
+      <span>Tilsmee</span>
+    </a>
 
+    <button class="menu-button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+
+    <nav class="navigation" aria-label="Hauptnavigation">
+      <a href="#start">Start</a>
+      <a href="#ueber">Über Tilsmee</a>
+      <a href="#watchface">WatchFace Studio</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="brain-wrap" aria-hidden="true">
+          <div class="brain-core">🧠</div>
+        </div>
+        <p class="eyebrow">PERSÖNLICHE KI · SMARTWATCH · SOFTWARE</p>
+        <h1>Willkommen bei <span>Tilsmee</span></h1>
+        <p class="hero-text">
+          Eine persönliche KI, die dich kennt, deine Projekte begleitet und künftig
+          auf Computer, Smartphone und Smartwatch verfügbar sein soll.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#ueber">Tilsmee kennenlernen</a>
+          <a class="button secondary" href="#watchface">WatchFace Studio</a>
+        </div>
+        <p class="status"><span></span> Tilsmee befindet sich in Entwicklung</p>
+      </div>
+    </section>
+
+    <section class="section" id="ueber">
+      <div class="section-heading">
+        <p class="eyebrow">DIE IDEE</p>
+        <h2>Mehr als nur ein Assistent</h2>
+        <p>
+          Tilsmee soll Sprache, Wissen, Erinnerungen, Projekte und Geräte in einer
+          klaren, persönlichen Oberfläche zusammenführen.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <span class="card-icon">💬</span>
+          <h3>Natürliche Kommunikation</h3>
+          <p>Schreiben und sprechen, ohne komplizierte Befehle oder technische Umwege.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon">🧩</span>
+          <h3>Persönliche Projekte</h3>
+          <p>Wissen, Arbeitsstände und Ideen bleiben strukturiert miteinander verbunden.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon">🔒</span>
+          <h3>Kontrolle und Datenschutz</h3>
+          <p>Eine transparente Lösung mit klarer Kontrolle über Funktionen und Daten.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section feature-section" id="watchface">
+      <div class="feature-copy">
+        <p class="eyebrow">TILSMEE WATCHFACE STUDIO</p>
+        <h2>Eigene Watchfaces gestalten</h2>
+        <p>
+          Das geplante Studio soll Hintergrundbilder, Uhrzeit, Datum, Wetter,
+          Schritte, Akku und weitere Elemente als frei positionierbare Ebenen verbinden.
+        </p>
+        <ul>
+          <li>Visuelle Vorschau am Computer</li>
+          <li>Bearbeitbare Ebenen und Positionen</li>
+          <li>Import eigener Grafiken</li>
+          <li>Späterer Export für kompatible Smartwatches</li>
+        </ul>
+      </div>
+
+      <div class="watch-preview" aria-label="Vorschau eines Tilsmee Watchfaces">
+        <div class="watch-case">
+          <div class="watch-screen">
+            <div class="mini-brain">🧠</div>
+            <div class="watch-time">10:09</div>
+            <div class="watch-date">DO · 05. AUG</div>
+            <div class="watch-values">
+              <span>♥ 72</span>
+              <span>⚡ 84%</span>
+              <span>👟 6.248</span>
+            </div>
+            <strong>TILSMEE</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="section-heading">
+        <p class="eyebrow">ROADMAP</p>
+        <h2>Der Weg nach vorn</h2>
+      </div>
+      <div class="timeline">
+        <article><span>01</span><div><h3>Homepage</h3><p>Öffentliche Basis für Projekt, Entwicklung und Dokumentation.</p></div></article>
+        <article><span>02</span><div><h3>WatchFace Studio</h3><p>Editor, Vorschau, Ebenenverwaltung und Exportworkflow.</p></div></article>
+        <article><span>03</span><div><h3>Persönliche KI</h3><p>Sprache, Wissen, Projekte und Geräte in einer Anwendung.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="kontakt">
+      <p class="eyebrow">KONTAKT</p>
+      <h2>Tilsmee wächst Schritt für Schritt.</h2>
+      <p>Weitere Informationen, Downloads und Entwicklungsstände folgen auf dieser Seite.</p>
+      <a class="button primary" href="mailto:kontakt@tilsmee.de">E-Mail schreiben</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Tilsmee</span>
+    <span>Entwickelt von Markus Smeets</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
