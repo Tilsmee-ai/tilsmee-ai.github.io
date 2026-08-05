@@ -14,14 +14,10 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 function updateClock() {
   const now = new Date();
-  const use12Hour = true;
-  let hours = now.getHours();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  if (use12Hour) hours = hours % 12 || 12;
+  const hours = now.getHours();
 
   document.getElementById('hoursMinutes').textContent = `${String(hours).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   document.getElementById('seconds').textContent = String(now.getSeconds()).padStart(2, '0');
-  document.getElementById('ampm').textContent = ampm;
 
   const weekdays = ['SONNTAG','MONTAG','DIENSTAG','MITTWOCH','DONNERSTAG','FREITAG','SAMSTAG'];
   const months = ['JANUAR','FEBRUAR','MÄRZ','APRIL','MAI','JUNI','JULI','AUGUST','SEPTEMBER','OKTOBER','NOVEMBER','DEZEMBER'];
