@@ -240,22 +240,31 @@ footer{display:flex;justify-content:space-between;gap:20px;padding-top:35px;colo
 .wf-value{position:absolute;z-index:3;white-space:nowrap;line-height:1;text-align:center;font-family:"Segoe UI",Arial,sans-serif;text-shadow:0 0 .018em #fff,0 0 .08em rgba(38,139,255,.8)}
 
 /* Masken decken ausschließlich die alten Beispielwerte des Referenzbildes ab. */
-.wf-mask-time{left:13.2%;top:35.2%;width:68.0%;height:15.7%}
-.wf-mask-seconds{left:76.0%;top:41.8%;width:12.8%;height:10.2%}
-.wf-mask-date-left{left:23.5%;top:52.4%;width:18.2%;height:5.7%}
-.wf-mask-date-day{left:45.2%;top:52.4%;width:10.2%;height:5.7%}
-.wf-mask-date-right{left:59.0%;top:52.4%;width:20.5%;height:5.7%}
+.wf-mask-time{left:12.7%;top:34.5%;width:69.0%;height:16.8%}
+.wf-mask-seconds{left:75.0%;top:39.8%;width:14.5%;height:12.5%}
+.wf-mask-date-left{left:22.8%;top:53.0%;width:19.3%;height:6.2%}
+.wf-mask-date-day{left:44.8%;top:52.8%;width:10.8%;height:6.2%}
+.wf-mask-date-right{left:58.4%;top:53.0%;width:22.0%;height:6.2%}
 .wf-mask-temp{left:17.8%;top:27.4%;width:14.2%;height:5.4%}
 .wf-mask-battery{left:70.2%;top:27.4%;width:14.0%;height:5.4%}
 .wf-mask-steps{left:20.5%;top:61.2%;width:14.5%;height:5.0%}
 .wf-mask-pulse{left:49.1%;top:61.2%;width:8.5%;height:5.0%}
 .wf-mask-kcal{left:72.3%;top:61.2%;width:12.5%;height:5.0%}
 
-.wf-time{left:13.4%;top:35.6%;width:66.0%;font-family:"Arial Black","Segoe UI",sans-serif;font-size:14.4cqw;font-weight:900;letter-spacing:-.07em;color:#fff}
-.wf-seconds{left:77.0%;top:42.0%;width:10.8%;font-size:6.7cqw;font-weight:500;color:#098fff;text-shadow:0 0 .12em rgba(0,132,255,.9)}
-.wf-weekday{left:23.8%;top:53.1%;width:18%;font-size:3.15cqw;font-weight:400;color:#fff;text-shadow:none}
-.wf-day{left:45.4%;top:52.2%;width:10%;font-size:5.2cqw;font-weight:600;color:#038fff;text-shadow:0 0 .1em rgba(0,132,255,.8)}
-.wf-monthyear{left:59%;top:53.1%;width:20.5%;font-size:3.15cqw;font-weight:400;color:#27c9f7;text-shadow:none}
+/* Stunden, Minuten und Sekunden werden getrennt gesetzt, damit nichts mehr kollidiert. */
+.wf-clock{
+  position:absolute;z-index:3;left:13.0%;top:35.0%;width:75.0%;height:15.2%;
+  display:flex;align-items:center;justify-content:center;white-space:nowrap;
+  font-family:"Arial Black","Segoe UI",Arial,sans-serif;line-height:1;
+  text-shadow:0 0 .018em #fff,0 0 .08em rgba(38,139,255,.8)
+}
+.wf-hour,.wf-minute{font-size:14.2cqw;font-weight:900;letter-spacing:-.065em;color:#fff}
+.wf-clock-separator{font-size:13.2cqw;font-weight:900;color:#fff;margin:0 .7cqw 0 .35cqw;transform:translateY(-.35cqw)}
+.wf-second-separator{font-size:7.0cqw;font-weight:600;color:#078fff;margin-left:1.8cqw;margin-right:.65cqw;transform:translateY(.65cqw);text-shadow:0 0 .12em rgba(0,132,255,.9)}
+.wf-second{font-family:"Segoe UI",Arial,sans-serif;font-size:6.7cqw;font-weight:500;color:#078fff;letter-spacing:0;transform:translateY(1.15cqw);text-shadow:0 0 .12em rgba(0,132,255,.9)}
+.wf-weekday{left:22.9%;top:54.0%;width:19%;font-size:3.15cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-day{left:45.1%;top:53.0%;width:10.4%;font-size:5.2cqw;font-weight:600;color:#038fff;text-shadow:0 0 .1em rgba(0,132,255,.8)}
+.wf-monthyear{left:58.5%;top:54.0%;width:22%;font-size:3.15cqw;font-weight:400;color:#27c9f7;text-shadow:none}
 .wf-temp{left:17.8%;top:27.8%;width:14.2%;font-size:3.7cqw;font-weight:400;color:#fff;text-shadow:none}
 .wf-battery{left:70.3%;top:27.8%;width:14%;font-size:3.7cqw;font-weight:400;color:#fff;text-shadow:none}
 .wf-steps{left:20.4%;top:61.7%;width:14.8%;font-size:3.9cqw;font-weight:400;color:#fff;text-shadow:none}
@@ -269,14 +278,42 @@ footer{display:flex;justify-content:space-between;gap:20px;padding-top:35px;colo
 @media(max-width:980px){.watch-tilt{width:min(650px,86vw)}}
 @media(max-width:620px){.watch-tilt{width:94vw}.watch-note{font-size:.62rem}}
 
+
 .brain-pulse{
-  position:absolute;z-index:4;left:49.55%;top:19.85%;width:1.85%;aspect-ratio:1;border-radius:50%;
-  transform:translate(-50%,-50%);background:#20bfff;box-shadow:0 0 .45cqw #fff,0 0 1.2cqw #18a8ff,0 0 2.2cqw rgba(0,132,255,.9);
-  animation:brainPulse 1s ease-in-out infinite;pointer-events:none
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:20.6%;
+  width:3.2%;
+  aspect-ratio:1;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle at 38% 35%,#ffffff 0 12%,#5ee7ff 22%,#078dff 58%,#0048b8 100%);
+  box-shadow:0 0 .7cqw rgba(255,255,255,.95),0 0 1.7cqw #13b8ff,0 0 3.2cqw rgba(0,102,255,.95);
+  animation:brainPulse 1s ease-in-out infinite;
+  pointer-events:none
 }
-.brain-pulse::after{
-  content:"";position:absolute;inset:-55%;border:1px solid rgba(41,194,255,.78);border-radius:50%;
+.brain-pulse::before{
+  content:"";
+  position:absolute;
+  inset:-45%;
+  border:2px solid rgba(55,203,255,.85);
+  border-radius:50%;
   animation:brainRipple 1s ease-out infinite
 }
-@keyframes brainPulse{0%,100%{transform:translate(-50%,-50%) scale(.84);opacity:.78}50%{transform:translate(-50%,-50%) scale(1.18);opacity:1}}
-@keyframes brainRipple{0%{transform:scale(.55);opacity:.8}100%{transform:scale(1.8);opacity:0}}
+.brain-pulse::after{
+  content:"";
+  position:absolute;
+  inset:26%;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 .8cqw #fff
+}
+@keyframes brainPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(.78);filter:brightness(.9)}
+  50%{transform:translate(-50%,-50%) scale(1.18);filter:brightness(1.35)}
+}
+@keyframes brainRipple{
+  0%{transform:scale(.45);opacity:.95}
+  100%{transform:scale(1.9);opacity:0}
+}
