@@ -70,8 +70,6 @@ async function fetchWeather(lat, lon, locationLabel = '') {
     const code = data.current.weather_code;
     const [icon, text] = weatherMap[code] || ['◌', 'Wetter'];
 
-    document.getElementById('temperature').textContent = `${temp}°`;
-    document.getElementById('weatherIcon').textContent = icon;
     document.getElementById('weatherText').textContent = `${text} · ${temp} °C`;
     status.textContent = locationLabel ? `Wetter für ${locationLabel}` : 'Wetter anhand deines Standorts';
   } catch {
@@ -98,11 +96,9 @@ loadWeather();
 document.getElementById('weatherButton').addEventListener('click', loadWeather);
 
 async function loadBattery() {
-  const batteryText = document.getElementById('battery');
   const watchBattery = document.getElementById('watchBattery');
 
   const applyBattery = value => {
-    batteryText.textContent = `${value}%`;
     watchBattery.textContent = `${value}%`;
   };
 
@@ -153,3 +149,40 @@ watchTilt.addEventListener('pointermove', event => {
 watchTilt.addEventListener('pointerleave', () => {
   watchShell.style.transform = '';
 });
+
+
+const layerButtons = document.querySelectorAll('.layer-button');
+const editorLabel = document.getElementById('editorLabel');
+const editorWatch = document.getElementById('editorWatch');
+const miniOverlay = document.getElementById('miniOverlay');
+const miniTime = document.getElementById('miniTime');
+const miniDate = document.getElementById('miniDate');
+
+const layerViews = {
+  background: { label: 'Hintergrund', overlay: '', className: 'view-background' },
+  time: { label: 'Uhrzeit', overlay: '10:09', className: 'view-time' },
+  date: { label: 'Datum', overlay: '05. AUGUST 2026', className: 'view-date' },
+  weather: { label: 'Wetter', overlay: '☁ 24 °C', className: 'view-weather' },
+  steps: { label: 'Schritte', overlay: '◉ 6.248', className: 'view-steps' },
+  battery: { label: 'Akku', overlay: '⚡ 84 %', className: 'view-battery' }
+};
+
+function showEditorLayer(layer) {
+  const view = layerViews[layer];
+  editorLabel.textContent = view.label;
+  miniOverlay.textContent = view.overlay;
+  editorWatch.dataset.activeLayer = layer;
+
+  miniTime.style.opacity = layer === 'time' ? '.24' : '1';
+  miniDate.style.opacity = layer === 'date' ? '.24' : '1';
+}
+
+layerButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    layerButtons.forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
+    showEditorLayer(button.dataset.layer);
+  });
+});
+
+showEditorLayer('background');

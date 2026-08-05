@@ -120,12 +120,6 @@ h2{margin-bottom:22px;font-size:clamp(2.5rem,5.2vw,4.8rem);line-height:1.02;lett
   content:"";position:absolute;inset:0;pointer-events:none;border-radius:50%;
   background:linear-gradient(125deg,rgba(255,255,255,.08),transparent 28%,transparent 65%,rgba(0,166,255,.06))
 }
-.watch-top{
-  position:absolute;top:11.5%;left:17%;right:17%;
-  display:flex;justify-content:space-between;align-items:center;
-  color:#d9eef9;font-size:.95rem
-}
-.weather-top,.battery-top{display:flex;gap:6px;align-items:center}
 .watch-logo-wrap{position:relative;width:118px;height:106px;margin-bottom:0}
 .watch-logo-wrap img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 16px rgba(48,191,255,.42))}
 .watch-core{width:12px;height:12px}
@@ -226,4 +220,228 @@ footer{display:flex;justify-content:space-between;gap:20px;padding-top:35px;colo
   .timeline-item{grid-template-columns:1fr}
   footer{flex-direction:column}
   .next-slide{display:none}
+}
+
+
+/* V6.1 targeted corrections */
+.brand-word,
+.watch-brand,
+.footer-wordmark,
+.contact-wordmark {
+  font-weight: 950;
+  letter-spacing: .035em;
+}
+
+.contact-wordmark {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+  letter-spacing: .15em;
+}
+
+/* Keep time and seconds absolutely stable, regardless of digit width. */
+.watch-time {
+  display: grid;
+  grid-template-columns: 5.15ch 2.2ch;
+  column-gap: .16em;
+  align-items: end;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.watch-time > span {
+  display: block;
+  width: 5.15ch;
+  text-align: left;
+  letter-spacing: -.035em;
+}
+
+.watch-time small {
+  display: block;
+  width: 2.2ch;
+  text-align: right;
+}
+
+/* Prevent the step field and all metric values from moving horizontally. */
+.watch-metrics {
+  align-items: start;
+}
+
+.watch-metrics div {
+  min-width: 5.8rem;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.watch-metrics div:nth-child(2) {
+  min-width: 8.4rem;
+}
+
+.watch-metrics strong {
+  display: inline-block;
+  min-width: 5.8ch;
+  text-align: right;
+  white-space: nowrap;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.watch-metrics div:nth-child(2) strong {
+  min-width: 7.2ch;
+}
+
+/* New rounded numeric face. */
+.watch-time,
+.mini-time,
+.layer-thumb {
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
+}
+
+/* Interactive WatchFace Studio layer previews. */
+.mock-body {
+  grid-template-columns: 232px 1fr;
+}
+
+.layers-panel {
+  padding: 17px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layers-panel > b {
+  margin-bottom: 5px;
+}
+
+.layer-button {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  align-items: center;
+  gap: 11px;
+  padding: 9px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  text-align: left;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.layer-button:hover,
+.layer-button.active {
+  color: #fff;
+  border-color: var(--line);
+  background: rgba(0, 133, 255, .13);
+}
+
+.layer-button > span:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.layer-button small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: .66rem;
+}
+
+.layer-thumb {
+  width: 54px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #dff6ff;
+  background: #02070d;
+  font-size: .7rem;
+  font-weight: 900;
+}
+
+.thumb-background {
+  background:
+    radial-gradient(circle at center, rgba(0, 145, 255, .34), transparent 58%),
+    #02070d;
+}
+
+.thumb-time {
+  font-size: .86rem;
+}
+
+.thumb-date {
+  color: var(--cyan);
+}
+
+.thumb-weather,
+.thumb-steps,
+.thumb-battery {
+  font-size: .68rem;
+}
+
+.mock-canvas {
+  position: relative;
+}
+
+.editor-label {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 2;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--cyan);
+  background: rgba(4, 13, 22, .76);
+  font-size: .72rem;
+  letter-spacing: .08em;
+}
+
+.mini-watch {
+  position: relative;
+  width: 270px;
+}
+
+.mini-time {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.mini-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--cyan);
+  font-size: 1.14rem;
+  font-weight: 900;
+  text-shadow: 0 0 18px rgba(69, 213, 255, .45);
+}
+
+.mini-brand {
+  margin-top: 14px;
+  font-size: .64rem;
+  font-weight: 950;
+  letter-spacing: .19em;
+}
+
+@media(max-width:700px) {
+  .mock-body {
+    grid-template-columns: 1fr;
+  }
+
+  .layers-panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .layers-panel > b {
+    grid-column: 1 / -1;
+  }
 }

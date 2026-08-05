@@ -64,18 +64,7 @@
           <div class="watch-shell">
             <div class="watch-crown"></div>
             <div class="watch-screen">
-              <div class="watch-top">
-                <div class="weather-top">
-                  <span class="watch-weather-icon" id="weatherIcon">◌</span>
-                  <span id="temperature">--°</span>
-                </div>
-                <div class="battery-top">
-                  <span>⚡</span>
-                  <span id="battery">--%</span>
-                </div>
-              </div>
-
-              <div class="watch-logo-wrap">
+<div class="watch-logo-wrap">
                 <img src="tilsmee-emblem.png" alt="Tilsmee Logo">
                 <span class="core-dot watch-core"></span>
               </div>
@@ -149,26 +138,54 @@
         <div class="mock-window">
           <div class="mock-topbar">
             <span></span><span></span><span></span>
-            <strong>Tilsmee WatchFace Studio</strong>
+            <strong><span class="silver">TILS</span><span class="blue">MEE</span> WatchFace Studio</strong>
           </div>
           <div class="mock-body">
-            <aside>
+            <aside class="layers-panel">
               <b>Ebenen</b>
-              <button class="active">Hintergrund</button>
-              <button>Uhrzeit</button>
-              <button>Datum</button>
-              <button>Wetter</button>
-              <button>Schritte</button>
-              <button>Akku</button>
+
+              <button class="layer-button active" data-layer="background">
+                <span class="layer-thumb thumb-background"></span>
+                <span><strong>Hintergrund</strong><small>Bild & Stil</small></span>
+              </button>
+
+              <button class="layer-button" data-layer="time">
+                <span class="layer-thumb thumb-time">10:09</span>
+                <span><strong>Uhrzeit</strong><small>Schrift & Position</small></span>
+              </button>
+
+              <button class="layer-button" data-layer="date">
+                <span class="layer-thumb thumb-date">05.08</span>
+                <span><strong>Datum</strong><small>Format & Größe</small></span>
+              </button>
+
+              <button class="layer-button" data-layer="weather">
+                <span class="layer-thumb thumb-weather">☁ 24°</span>
+                <span><strong>Wetter</strong><small>Symbol & Temperatur</small></span>
+              </button>
+
+              <button class="layer-button" data-layer="steps">
+                <span class="layer-thumb thumb-steps">◉ 6248</span>
+                <span><strong>Schritte</strong><small>Zähler & Position</small></span>
+              </button>
+
+              <button class="layer-button" data-layer="battery">
+                <span class="layer-thumb thumb-battery">⚡ 84%</span>
+                <span><strong>Akku</strong><small>Live-Systemwert</small></span>
+              </button>
             </aside>
+
             <div class="mock-canvas">
-              <div class="mini-watch">
+              <div class="editor-label" id="editorLabel">Hintergrund</div>
+              <div class="mini-watch" id="editorWatch">
                 <div class="mini-logo">
                   <img src="tilsmee-emblem.png" alt="">
                   <span class="core-dot mini-core"></span>
                 </div>
-                <strong>10:09</strong>
-                <small>05. AUGUST 2026</small>
+                <strong class="mini-time" id="miniTime">10:09</strong>
+                <small class="mini-date" id="miniDate">05. AUGUST 2026</small>
+                <div class="mini-overlay" id="miniOverlay"></div>
+                <div class="mini-brand"><span class="silver">TILS</span><span class="blue">MEE</span></div>
               </div>
             </div>
           </div>
@@ -222,14 +239,14 @@
           <img src="tilsmee-emblem.png" alt="">
           <span class="core-dot"></span>
         </div>
-        <p class="eyebrow">TILSMEE AI</p>
+        <div class="contact-wordmark"><span class="silver">TILS</span><span class="blue">MEE</span> <span class="blue">AI</span></div>
         <h2>Die Entwicklung läuft.</h2>
         <p>Neue Funktionen, Tests und Fortschritte werden hier sichtbar gemacht.</p>
         <a class="button primary" href="mailto:kontakt@tilsmee.de">Kontakt aufnehmen</a>
       </div>
 
       <footer>
-        <span>© <span id="year"></span> Tilsmee</span>
+        <span>© <span id="year"></span> <span class="footer-wordmark"><span class="silver">TILS</span><span class="blue">MEE</span></span></span>
         <span>Entwickelt von Markus Smeets</span>
       </footer>
     </section>
