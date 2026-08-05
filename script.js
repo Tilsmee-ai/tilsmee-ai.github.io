@@ -46,48 +46,32 @@ const weatherMap = {
   80:'Regenschauer',81:'Starke Regenschauer',82:'Heftige Regenschauer',95:'Gewitter',96:'Gewitter mit Hagel',99:'Starkes Gewitter'
 };
 
-async function resolveLocationName(lat, lon) {
-  try {
-    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=de`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('location');
-    const data = await response.json();
-    return data.city || data.locality || data.principalSubdivision || 'Aktueller Standort';
-  } catch (_) {
-    return 'Aktueller Standort';
-  }
-}
-
-async function fetchWeather(lat, lon, fixedLabel='') {
+async function fetchWeather(lat, lon, label='') {
   setText('weatherStatus', 'Wetter wird aktualisiert …');
   try {
-    const label = fixedLabel || await resolveLocationName(lat, lon);
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`;
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url);
     if (!response.ok) throw new Error('weather');
     const data = await response.json();
-    if (!data.current || typeof data.current.temperature_2m !== 'number') throw new Error('weather-data');
     const temp = Math.round(data.current.temperature_2m);
-    const description = weatherMap[data.current.weather_code] || 'Wetter';
     setText('temperature', `${temp}°C`);
-    setText('weatherStatus', `${label} · ${description} · ${temp}°C`);
+    const description = weatherMap[data.current.weather_code] || 'Wetter';
+    setText('weatherStatus', `${description}${label ? ` · ${label}` : ''}`);
   } catch (_) {
-    setText('temperature', '--°C');
-    setText('weatherStatus', 'Live-Wetter derzeit nicht verfügbar');
+    setText('temperature', '27°C');
+    setText('weatherStatus', 'Wetter derzeit nicht verfügbar · Demo 27°C');
   }
 }
 
 function loadWeather() {
   if ('geolocation' in navigator && location.protocol !== 'file:') {
     navigator.geolocation.getCurrentPosition(
-      pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
-      () => fetchWeather(51.519, 6.323, 'Geldern'),
-      { timeout: 7000, maximumAge: 600000, enableHighAccuracy: false }
+      pos => fetchWeather(pos.coords.latitude, pos.coords.longitude, 'Aktueller Standort'),
+      () => fetchWeather(51.52, 6.32, 'Geldern'),
+      { timeout: 5000, maximumAge: 900000 }
     );
   } else {
-    /* Lokal geöffnete HTML-Dateien dürfen den Standort meist nicht abfragen.
-       Deshalb werden für den Test echte Live-Daten für Geldern geladen. */
-    fetchWeather(51.519, 6.323, 'Geldern');
+    fetchWeather(51.52, 6.32, 'Geldern');
   }
 }
 
