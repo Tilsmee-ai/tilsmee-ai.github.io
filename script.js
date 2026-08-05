@@ -14,20 +14,20 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 function updateClock() {
   const now = new Date();
-  const hh = String(now.getHours()).padStart(2, '0');
-  const mm = String(now.getMinutes()).padStart(2, '0');
-  const ss = String(now.getSeconds()).padStart(2, '0');
+  const use12Hour = true;
+  let hours = now.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  if (use12Hour) hours = hours % 12 || 12;
 
-  document.getElementById('hoursMinutes').textContent = `${hh}:${mm}`;
-  document.getElementById('seconds').textContent = ss;
+  document.getElementById('hoursMinutes').textContent = `${String(hours).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  document.getElementById('seconds').textContent = String(now.getSeconds()).padStart(2, '0');
+  document.getElementById('ampm').textContent = ampm;
 
-  const formatter = new Intl.DateTimeFormat('de-DE', {
-    weekday: 'short',
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-  document.getElementById('dateText').textContent = formatter.format(now).toUpperCase();
+  const weekdays = ['SONNTAG','MONTAG','DIENSTAG','MITTWOCH','DONNERSTAG','FREITAG','SAMSTAG'];
+  const months = ['JANUAR','FEBRUAR','MÄRZ','APRIL','MAI','JUNI','JULI','AUGUST','SEPTEMBER','OKTOBER','NOVEMBER','DEZEMBER'];
+  document.getElementById('weekday').textContent = weekdays[now.getDay()];
+  document.getElementById('dayNumber').textContent = String(now.getDate()).padStart(2, '0');
+  document.getElementById('monthYear').textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
 }
 updateClock();
 setInterval(updateClock, 1000);
@@ -70,10 +70,10 @@ async function fetchWeather(lat, lon, locationLabel = '') {
     const code = data.current.weather_code;
     const [icon, text] = weatherMap[code] || ['◌', 'Wetter'];
 
-    document.getElementById('weatherText').textContent = `${text} · ${temp} °C`;
+    document.getElementById('temperature').textContent = `${temp}°`;
+    document.getElementById('temperature').textContent = `${temp}°C`;
     status.textContent = locationLabel ? `Wetter für ${locationLabel}` : 'Wetter anhand deines Standorts';
   } catch {
-    document.getElementById('weatherText').textContent = 'Wetter nicht verfügbar';
     status.textContent = 'Wetter konnte nicht geladen werden.';
   }
 }
@@ -96,10 +96,9 @@ loadWeather();
 document.getElementById('weatherButton').addEventListener('click', loadWeather);
 
 async function loadBattery() {
-  const watchBattery = document.getElementById('watchBattery');
-
+  const batteryText = document.getElementById('battery');
   const applyBattery = value => {
-    watchBattery.textContent = `${value}%`;
+    batteryText.textContent = `${value}%`;
   };
 
   try {
@@ -119,7 +118,7 @@ loadBattery();
 
 const stepsElement = document.getElementById('steps');
 const stepDuration = 3000;
-const maxSteps = 12345;
+const maxSteps = 8753;
 let stepStart = performance.now();
 
 function animateSteps(now) {
@@ -137,7 +136,7 @@ function animateSteps(now) {
 requestAnimationFrame(animateSteps);
 
 const watchTilt = document.getElementById('watchTilt');
-const watchShell = watchTilt.querySelector('.watch-shell');
+const watchShell = watchTilt.querySelector('.reference-watch');
 
 watchTilt.addEventListener('pointermove', event => {
   const rect = watchTilt.getBoundingClientRect();
@@ -151,12 +150,6 @@ watchTilt.addEventListener('pointerleave', () => {
 });
 
 
-
-
-const layerButtons = document.querySelectorAll('.layer-button');
-const editorLabel = document.getElementById('editorLabel');
-const editorWatch = document.getElementById('editorWatch');
-const layerLabels = {background:'Hintergrund',time:'Uhrzeit',date:'Datum',weather:'Wetter',steps:'Schritte',battery:'Akku'};
-function setEditorLayer(layer){editorLabel.textContent=layerLabels[layer]||'Hintergrund';editorWatch.dataset.activeLayer=layer;}
-layerButtons.forEach(button=>{button.addEventListener('click',()=>{layerButtons.forEach(item=>item.classList.remove('active'));button.classList.add('active');setEditorLayer(button.dataset.layer);});});
-setEditorLayer('background');
+// Demo-Gesundheitswerte: echte Smartwatch-Daten können später an diese IDs gebunden werden.
+document.getElementById('heartRate').textContent = '72';
+document.getElementById('calories').textContent = '456';

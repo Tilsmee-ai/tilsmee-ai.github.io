@@ -120,6 +120,12 @@ h2{margin-bottom:22px;font-size:clamp(2.5rem,5.2vw,4.8rem);line-height:1.02;lett
   content:"";position:absolute;inset:0;pointer-events:none;border-radius:50%;
   background:linear-gradient(125deg,rgba(255,255,255,.08),transparent 28%,transparent 65%,rgba(0,166,255,.06))
 }
+.watch-top{
+  position:absolute;top:11.5%;left:17%;right:17%;
+  display:flex;justify-content:space-between;align-items:center;
+  color:#d9eef9;font-size:.95rem
+}
+.weather-top,.battery-top{display:flex;gap:6px;align-items:center}
 .watch-logo-wrap{position:relative;width:118px;height:106px;margin-bottom:0}
 .watch-logo-wrap img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 16px rgba(48,191,255,.42))}
 .watch-core{width:12px;height:12px}
@@ -223,247 +229,44 @@ footer{display:flex;justify-content:space-between;gap:20px;padding-top:35px;colo
 }
 
 
-/* V6.1 targeted corrections */
-.brand-word,
-.watch-brand,
-.footer-wordmark,
-.contact-wordmark {
-  font-weight: 950;
-  letter-spacing: .035em;
-}
+/* =========================================================
+   TILSMEE REFERENZUHR – verbindliches Originaldesign
+   ========================================================= */
+.watch-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;perspective:1400px}
+.watch-tilt{width:min(680px,48vw);aspect-ratio:1;transform-style:preserve-3d}
+.reference-watch{position:relative;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;transform-style:preserve-3d;transition:transform .22s ease;filter:drop-shadow(0 30px 55px rgba(0,0,0,.55)) drop-shadow(0 0 32px rgba(0,145,255,.12));background:#000}
+.reference-face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;user-select:none;pointer-events:none}
+.wf-mask{position:absolute;background:#000;z-index:2}
+.wf-value{position:absolute;z-index:3;white-space:nowrap;line-height:1;text-align:center;font-family:"Segoe UI",Arial,sans-serif;text-shadow:0 0 .018em #fff,0 0 .08em rgba(38,139,255,.8)}
 
-.contact-wordmark {
-  margin-bottom: 12px;
-  font-size: 1.05rem;
-  letter-spacing: .15em;
-}
+/* Masken decken ausschließlich die alten Beispielwerte des Referenzbildes ab. */
+.wf-mask-time{left:13.2%;top:35.2%;width:61.8%;height:15.7%}
+.wf-mask-seconds{left:76.4%;top:42.2%;width:11.8%;height:9.8%}
+.wf-mask-ampm{left:76.3%;top:35.3%;width:11.4%;height:6.4%}
+.wf-mask-date-left{left:23.5%;top:52.4%;width:18.2%;height:5.7%}
+.wf-mask-date-day{left:45.2%;top:52.4%;width:10.2%;height:5.7%}
+.wf-mask-date-right{left:59.0%;top:52.4%;width:20.5%;height:5.7%}
+.wf-mask-temp{left:17.8%;top:27.4%;width:14.2%;height:5.4%}
+.wf-mask-battery{left:70.2%;top:27.4%;width:14.0%;height:5.4%}
+.wf-mask-steps{left:20.5%;top:61.2%;width:14.5%;height:5.0%}
+.wf-mask-pulse{left:49.1%;top:61.2%;width:8.5%;height:5.0%}
+.wf-mask-kcal{left:72.3%;top:61.2%;width:12.5%;height:5.0%}
 
-/* Keep time and seconds absolutely stable, regardless of digit width. */
-.watch-time {
-  display: grid;
-  grid-template-columns: 5.15ch 2.2ch;
-  column-gap: .16em;
-  align-items: end;
-  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
+.wf-time{left:13.4%;top:35.6%;width:61.2%;font-family:"Arial Black","Segoe UI",sans-serif;font-size:14.4cqw;font-weight:900;letter-spacing:-.07em;color:#fff}
+.wf-seconds{left:76.1%;top:42.7%;width:11.8%;font-size:7.0cqw;font-weight:500;color:#098fff;text-shadow:0 0 .12em rgba(0,132,255,.9)}
+.wf-ampm{left:76.5%;top:36.2%;width:10.8%;font-size:4.3cqw;font-weight:500;color:#29baff;text-shadow:none}
+.wf-weekday{left:23.8%;top:53.1%;width:18%;font-size:3.15cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-day{left:45.4%;top:52.2%;width:10%;font-size:5.2cqw;font-weight:600;color:#038fff;text-shadow:0 0 .1em rgba(0,132,255,.8)}
+.wf-monthyear{left:59%;top:53.1%;width:20.5%;font-size:3.15cqw;font-weight:400;color:#27c9f7;text-shadow:none}
+.wf-temp{left:17.8%;top:27.8%;width:14.2%;font-size:3.7cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-battery{left:70.3%;top:27.8%;width:14%;font-size:3.7cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-steps{left:20.4%;top:61.7%;width:14.8%;font-size:3.9cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-pulse{left:49%;top:61.7%;width:8.7%;font-size:3.9cqw;font-weight:400;color:#fff;text-shadow:none}
+.wf-kcal{left:72.1%;top:61.7%;width:12.8%;font-size:3.9cqw;font-weight:400;color:#fff;text-shadow:none}
 
-.watch-time > span {
-  display: block;
-  width: 5.15ch;
-  text-align: left;
-  letter-spacing: -.035em;
-}
+/* cqw benötigt einen Container. */
+.reference-watch{container-type:inline-size}
+.watch-note{margin:20px 0 0;color:var(--muted);font-size:.72rem;letter-spacing:.22em}
 
-.watch-time small {
-  display: block;
-  width: 2.2ch;
-  text-align: right;
-}
-
-/* Prevent the step field and all metric values from moving horizontally. */
-.watch-metrics {
-  align-items: start;
-}
-
-.watch-metrics div {
-  min-width: 5.8rem;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-.watch-metrics div:nth-child(2) {
-  min-width: 8.4rem;
-}
-
-.watch-metrics strong {
-  display: inline-block;
-  min-width: 5.8ch;
-  text-align: right;
-  white-space: nowrap;
-  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-.watch-metrics div:nth-child(2) strong {
-  min-width: 7.2ch;
-}
-
-/* New rounded numeric face. */
-.watch-time,
-.mini-time,
-.layer-thumb {
-  font-family: "Arial Rounded MT Bold", "Trebuchet MS", "Arial", sans-serif;
-}
-
-/* Interactive WatchFace Studio layer previews. */
-.mock-body {
-  grid-template-columns: 232px 1fr;
-}
-
-.layers-panel {
-  padding: 17px;
-  border-right: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.layers-panel > b {
-  margin-bottom: 5px;
-}
-
-.layer-button {
-  display: grid;
-  grid-template-columns: 54px 1fr;
-  align-items: center;
-  gap: 11px;
-  padding: 9px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  text-align: left;
-  color: var(--muted);
-  background: transparent;
-  cursor: pointer;
-  transition: .2s ease;
-}
-
-.layer-button:hover,
-.layer-button.active {
-  color: #fff;
-  border-color: var(--line);
-  background: rgba(0, 133, 255, .13);
-}
-
-.layer-button > span:last-child {
-  display: flex;
-  flex-direction: column;
-}
-
-.layer-button small {
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: .66rem;
-}
-
-.layer-thumb {
-  width: 54px;
-  height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  color: #dff6ff;
-  background: #02070d;
-  font-size: .7rem;
-  font-weight: 900;
-}
-
-.thumb-background {
-  background:
-    radial-gradient(circle at center, rgba(0, 145, 255, .34), transparent 58%),
-    #02070d;
-}
-
-.thumb-time {
-  font-size: .86rem;
-}
-
-.thumb-date {
-  color: var(--cyan);
-}
-
-.thumb-weather,
-.thumb-steps,
-.thumb-battery {
-  font-size: .68rem;
-}
-
-.mock-canvas {
-  position: relative;
-}
-
-.editor-label {
-  position: absolute;
-  left: 18px;
-  top: 18px;
-  z-index: 2;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  color: var(--cyan);
-  background: rgba(4, 13, 22, .76);
-  font-size: .72rem;
-  letter-spacing: .08em;
-}
-
-.mini-watch {
-  position: relative;
-  width: 270px;
-}
-
-.mini-time {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-.mini-overlay {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  color: var(--cyan);
-  font-size: 1.14rem;
-  font-weight: 900;
-  text-shadow: 0 0 18px rgba(69, 213, 255, .45);
-}
-
-.mini-brand {
-  margin-top: 14px;
-  font-size: .64rem;
-  font-weight: 950;
-  letter-spacing: .19em;
-}
-
-@media(max-width:700px) {
-  .mock-body {
-    grid-template-columns: 1fr;
-  }
-
-  .layers-panel {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .layers-panel > b {
-    grid-column: 1 / -1;
-  }
-}
-
-
-/* V6.2 Fehlerbereinigung */
-.watch-time{position:relative!important;display:block!important;width:auto!important;min-width:0!important;margin-top:-2px;text-align:center;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-.watch-time>span{display:block!important;width:auto!important;min-width:0!important;text-align:center!important;font-size:clamp(4.6rem,7.6vw,7rem);font-weight:900;line-height:.84;letter-spacing:-.045em}
-.watch-time small{position:absolute;right:-1.9rem;bottom:.55rem;display:block!important;width:2ch!important;margin:0!important;color:var(--cyan);font-size:1rem;font-weight:900;line-height:1;text-align:right;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-.watch-metrics{display:grid!important;grid-template-columns:5.8rem 8.6rem 5.8rem;gap:1rem!important;align-items:start;justify-content:center;width:100%}
-.watch-metrics div,.watch-metrics div:nth-child(2){min-width:0!important;width:100%;display:grid;grid-template-columns:1rem 1fr;column-gap:.4rem;align-items:center;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-.watch-metrics strong,.watch-metrics div:nth-child(2) strong{display:block;min-width:0!important;width:100%;text-align:right;white-space:nowrap;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-.mini-watch{position:relative;width:270px;aspect-ratio:1;border-radius:50%;border:9px solid #303b48;background:#010409;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 2px #687687,0 26px 60px rgba(0,0,0,.35);overflow:hidden}
-.editor-part{transition:opacity .2s ease,transform .2s ease,filter .2s ease}
-.mini-logo{position:relative;width:78px;height:70px;margin-bottom:.2rem}
-.mini-time{margin:0;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-size:3rem;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-.mini-date{margin-top:.25rem;color:var(--cyan)}
-.mini-weather,.mini-steps,.mini-battery{margin-top:.45rem;color:#d9edf8;font-size:.78rem}
-.mini-brand{margin-top:.8rem;font-size:.64rem;font-weight:950;letter-spacing:.19em}
-.mini-watch[data-active-layer="background"] .editor-part{opacity:1;filter:none}
-.mini-watch:not([data-active-layer="background"]) .editor-part{opacity:.12;filter:saturate(.4)}
-.mini-watch[data-active-layer="time"] [data-part~="time"],.mini-watch[data-active-layer="date"] [data-part~="date"],.mini-watch[data-active-layer="weather"] [data-part~="weather"],.mini-watch[data-active-layer="steps"] [data-part~="steps"],.mini-watch[data-active-layer="battery"] [data-part~="battery"]{opacity:1;filter:none;transform:scale(1.04);color:var(--cyan);text-shadow:0 0 18px rgba(69,213,255,.45)}
-.mini-watch:not([data-active-layer="background"]) [data-part~="logo"]{opacity:.32;filter:saturate(.65)}
-.mini-overlay{display:none!important}
-@media(max-width:620px){.watch-time small{right:-1.25rem;bottom:.35rem}.watch-metrics{grid-template-columns:5rem 7.2rem 5rem;gap:.45rem!important}}
+@media(max-width:980px){.watch-tilt{width:min(650px,86vw)}}
+@media(max-width:620px){.watch-tilt{width:94vw}.watch-note{font-size:.62rem}}
