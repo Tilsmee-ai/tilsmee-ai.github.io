@@ -151,38 +151,12 @@ watchTilt.addEventListener('pointerleave', () => {
 });
 
 
+
+
 const layerButtons = document.querySelectorAll('.layer-button');
 const editorLabel = document.getElementById('editorLabel');
 const editorWatch = document.getElementById('editorWatch');
-const miniOverlay = document.getElementById('miniOverlay');
-const miniTime = document.getElementById('miniTime');
-const miniDate = document.getElementById('miniDate');
-
-const layerViews = {
-  background: { label: 'Hintergrund', overlay: '', className: 'view-background' },
-  time: { label: 'Uhrzeit', overlay: '10:09', className: 'view-time' },
-  date: { label: 'Datum', overlay: '05. AUGUST 2026', className: 'view-date' },
-  weather: { label: 'Wetter', overlay: '☁ 24 °C', className: 'view-weather' },
-  steps: { label: 'Schritte', overlay: '◉ 6.248', className: 'view-steps' },
-  battery: { label: 'Akku', overlay: '⚡ 84 %', className: 'view-battery' }
-};
-
-function showEditorLayer(layer) {
-  const view = layerViews[layer];
-  editorLabel.textContent = view.label;
-  miniOverlay.textContent = view.overlay;
-  editorWatch.dataset.activeLayer = layer;
-
-  miniTime.style.opacity = layer === 'time' ? '.24' : '1';
-  miniDate.style.opacity = layer === 'date' ? '.24' : '1';
-}
-
-layerButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    layerButtons.forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
-    showEditorLayer(button.dataset.layer);
-  });
-});
-
-showEditorLayer('background');
+const layerLabels = {background:'Hintergrund',time:'Uhrzeit',date:'Datum',weather:'Wetter',steps:'Schritte',battery:'Akku'};
+function setEditorLayer(layer){editorLabel.textContent=layerLabels[layer]||'Hintergrund';editorWatch.dataset.activeLayer=layer;}
+layerButtons.forEach(button=>{button.addEventListener('click',()=>{layerButtons.forEach(item=>item.classList.remove('active'));button.classList.add('active');setEditorLayer(button.dataset.layer);});});
+setEditorLayer('background');

@@ -445,3 +445,25 @@ footer{display:flex;justify-content:space-between;gap:20px;padding-top:35px;colo
     grid-column: 1 / -1;
   }
 }
+
+
+/* V6.2 Fehlerbereinigung */
+.watch-time{position:relative!important;display:block!important;width:auto!important;min-width:0!important;margin-top:-2px;text-align:center;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.watch-time>span{display:block!important;width:auto!important;min-width:0!important;text-align:center!important;font-size:clamp(4.6rem,7.6vw,7rem);font-weight:900;line-height:.84;letter-spacing:-.045em}
+.watch-time small{position:absolute;right:-1.9rem;bottom:.55rem;display:block!important;width:2ch!important;margin:0!important;color:var(--cyan);font-size:1rem;font-weight:900;line-height:1;text-align:right;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.watch-metrics{display:grid!important;grid-template-columns:5.8rem 8.6rem 5.8rem;gap:1rem!important;align-items:start;justify-content:center;width:100%}
+.watch-metrics div,.watch-metrics div:nth-child(2){min-width:0!important;width:100%;display:grid;grid-template-columns:1rem 1fr;column-gap:.4rem;align-items:center;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.watch-metrics strong,.watch-metrics div:nth-child(2) strong{display:block;min-width:0!important;width:100%;text-align:right;white-space:nowrap;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.mini-watch{position:relative;width:270px;aspect-ratio:1;border-radius:50%;border:9px solid #303b48;background:#010409;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 2px #687687,0 26px 60px rgba(0,0,0,.35);overflow:hidden}
+.editor-part{transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.mini-logo{position:relative;width:78px;height:70px;margin-bottom:.2rem}
+.mini-time{margin:0;font-family:"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif;font-size:3rem;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.mini-date{margin-top:.25rem;color:var(--cyan)}
+.mini-weather,.mini-steps,.mini-battery{margin-top:.45rem;color:#d9edf8;font-size:.78rem}
+.mini-brand{margin-top:.8rem;font-size:.64rem;font-weight:950;letter-spacing:.19em}
+.mini-watch[data-active-layer="background"] .editor-part{opacity:1;filter:none}
+.mini-watch:not([data-active-layer="background"]) .editor-part{opacity:.12;filter:saturate(.4)}
+.mini-watch[data-active-layer="time"] [data-part~="time"],.mini-watch[data-active-layer="date"] [data-part~="date"],.mini-watch[data-active-layer="weather"] [data-part~="weather"],.mini-watch[data-active-layer="steps"] [data-part~="steps"],.mini-watch[data-active-layer="battery"] [data-part~="battery"]{opacity:1;filter:none;transform:scale(1.04);color:var(--cyan);text-shadow:0 0 18px rgba(69,213,255,.45)}
+.mini-watch:not([data-active-layer="background"]) [data-part~="logo"]{opacity:.32;filter:saturate(.65)}
+.mini-overlay{display:none!important}
+@media(max-width:620px){.watch-time small{right:-1.25rem;bottom:.35rem}.watch-metrics{grid-template-columns:5rem 7.2rem 5rem;gap:.45rem!important}}
