@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#03070c">
+  <meta name="description" content="TILSMEE ai – dein persönlicher KI-Assistent auf jedem Gerät.">
+  <title>TILSMEE ai | Dein persönlicher KI-Assistent</title>
+  <link rel="icon" href="tilsmee-emblem.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+      <img src="tilsmee-emblem.png" alt="">
+      <span class="core-dot"></span>
+    </div>
+    <div class="loader-name">
+      <img src="tilsmee-wordmark.png" alt="TILSMEE">
+      <span class="ai">ai</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <a class="brand" href="#start" aria-label="TILSMEE Startseite">
+      <span class="brand-symbol">
+        <img src="tilsmee-emblem.png" alt="">
+        <span class="core-dot core-dot-small"></span>
+      </span>
+      <span class="brand-lockup">
+        <img src="tilsmee-wordmark.png" alt="TILSMEE">
+        <span class="ai">ai</span>
+      </span>
+    </a>
+
+    <nav aria-label="Hauptnavigation">
+      <a href="#start">Start</a>
+      <a href="#vision">TILSMEE</a>
+      <a href="#studio">WatchFace Studio</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+
+    <a class="header-contact" href="#kontakt">Kontakt</a>
+  </header>
+
+  <main>
+    <section class="panel hero" id="start">
+      <div class="grid-glow grid-glow-left"></div>
+      <div class="grid-glow grid-glow-right"></div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow">PERSÖNLICHE KI · SOFTWARE · SMARTWATCH</p>
+
+        <div class="hero-lockup">
+          <img src="tilsmee-wordmark.png" alt="TILSMEE">
+          <span class="ai">ai</span>
+        </div>
+
+        <h1>Dein persönlicher KI-Assistent.<br>Auf jedem Gerät.</h1>
+
+        <p class="lead">
+          TILSMEE verbindet Projekte, Wissen und Geräte zu einem persönlichen System,
+          das dich im Alltag zuverlässig begleitet.
+        </p>
+
+        <div class="actions">
+          <a class="button button-primary" href="#studio">WatchFace Studio ansehen</a>
+          <button class="button button-secondary" id="weatherButton" type="button">Wetter aktualisieren</button>
+        </div>
+
+        <p class="status-line" id="weatherStatus">Wetter wird geladen …</p>
+      </div>
+
+      <div class="watch-area reveal">
+        <div class="watch-hover" id="watchHover">
+          <div class="watch-case">
+            <span class="watch-crown"></span>
+            <div class="watch-glass">
+              <div class="watch-logo">
+                <img src="tilsmee-emblem.png" alt="">
+                <span class="core-dot watch-core"></span>
+              </div>
+
+              <div class="time-row">
+                <span class="time-main" id="timeMain">00:00</span>
+                <span class="time-seconds" id="timeSeconds">00</span>
+              </div>
+
+              <div class="watch-date" id="watchDate">DATUM</div>
+              <div class="watch-weather" id="watchWeather">WETTER WIRD GELADEN</div>
+
+              <div class="metrics">
+                <div class="metric">
+                  <span class="metric-icon">♥</span>
+                  <strong>72</strong>
+                  <small>BPM</small>
+                </div>
+                <div class="metric metric-steps">
+                  <span class="metric-icon">◉</span>
+                  <strong id="stepCounter">0</strong>
+                  <small>SCHRITTE</small>
+                </div>
+                <div class="metric">
+                  <span class="metric-icon">⚡</span>
+                  <strong id="batteryValue">--%</strong>
+                  <small>AKKU</small>
+                </div>
+              </div>
+
+              <div class="watch-wordmark">
+                <img src="tilsmee-wordmark.png" alt="TILSMEE">
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="watch-hint">Bewege die Maus über die Uhr</p>
+      </div>
+
+      <a class="scroll-next" href="#vision">WEITER<span></span></a>
+    </section>
+
+    <section class="panel vision" id="vision">
+      <div class="section-head reveal">
+        <p class="eyebrow">DIE VISION</p>
+        <h2>Ein persönliches System statt vieler einzelner Werkzeuge.</h2>
+        <p>
+          TILSMEE soll deine Arbeitsweise verstehen, Zusammenhänge erhalten und dir
+          genau dort helfen, wo du gerade bist.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <span>01</span>
+          <h3>Persönlich</h3>
+          <p>Projekte, Vorlieben und Arbeitsstände bleiben sinnvoll verbunden.</p>
+        </article>
+        <article class="feature-card reveal">
+          <span>02</span>
+          <h3>Sicher</h3>
+          <p>Klare Kontrolle, nachvollziehbare Funktionen und bewusster Umgang mit Daten.</p>
+        </article>
+        <article class="feature-card reveal">
+          <span>03</span>
+          <h3>Überall</h3>
+          <p>Computer, Smartphone und Smartwatch werden Teil eines gemeinsamen Systems.</p>
+        </article>
+        <article class="feature-card reveal">
+          <span>04</span>
+          <h3>Zukunftssicher</h3>
+          <p>Modular aufgebaut und Schritt für Schritt erweiterbar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel studio" id="studio">
+      <div class="studio-window reveal">
+        <div class="window-bar">
+          <span></span><span></span><span></span>
+          <div class="window-title">
+            <img src="tilsmee-wordmark.png" alt="TILSMEE">
+            <b>WatchFace Studio</b>
+          </div>
+        </div>
+
+        <div class="studio-body">
+          <aside class="layers">
+            <h3>Ebenen</h3>
+
+            <button class="layer active" data-layer="all">
+              <span class="layer-preview preview-bg"></span>
+              <span><b>Gesamtansicht</b><small>Alle Elemente</small></span>
+            </button>
+            <button class="layer" data-layer="time">
+              <span class="layer-preview preview-time">10:09</span>
+              <span><b>Uhrzeit</b><small>Schrift & Position</small></span>
+            </button>
+            <button class="layer" data-layer="date">
+              <span class="layer-preview preview-date">05.08</span>
+              <span><b>Datum</b><small>Format & Größe</small></span>
+            </button>
+            <button class="layer" data-layer="weather">
+              <span class="layer-preview preview-weather">☁ 24°</span>
+              <span><b>Wetter</b><small>Symbol & Temperatur</small></span>
+            </button>
+            <button class="layer" data-layer="steps">
+              <span class="layer-preview preview-steps">◉ 6248</span>
+              <span><b>Schritte</b><small>Zähler & Position</small></span>
+            </button>
+            <button class="layer" data-layer="battery">
+              <span class="layer-preview preview-battery">⚡ 84%</span>
+              <span><b>Akku</b><small>Live-Systemwert</small></span>
+            </button>
+          </aside>
+
+          <div class="editor-stage">
+            <div class="stage-label" id="stageLabel">Gesamtansicht</div>
+            <div class="editor-watch" id="editorWatch" data-active="all">
+              <div class="editor-logo editor-item" data-item="logo">
+                <img src="tilsmee-emblem.png" alt="">
+                <span class="core-dot editor-core"></span>
+              </div>
+              <div class="editor-time editor-item" data-item="time">10:09</div>
+              <div class="editor-date editor-item" data-item="date">05. AUGUST 2026</div>
+              <div class="editor-weather editor-item" data-item="weather">☁ 24 °C</div>
+              <div class="editor-metrics">
+                <span class="editor-item" data-item="steps">◉ 6.248</span>
+                <span class="editor-item" data-item="battery">⚡ 84 %</span>
+              </div>
+              <div class="editor-wordmark editor-item" data-item="logo">
+                <img src="tilsmee-wordmark.png" alt="TILSMEE">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="studio-copy reveal">
+        <p class="eyebrow">WATCHFACE STUDIO</p>
+        <h2>Dein Design wird zum funktionierenden Zifferblatt.</h2>
+        <p>
+          Ein klarer Editor mit frei positionierbaren Elementen, echter Vorschau
+          und einem sauberen Exportworkflow.
+        </p>
+        <ul>
+          <li>Live-Vorschau am Computer</li>
+          <li>Eigene Bilder und Hintergründe</li>
+          <li>Uhrzeit, Datum, Wetter, Schritte und Akku</li>
+          <li>Export für kompatible Smartwatches</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel roadmap" id="roadmap">
+      <div class="section-head reveal">
+        <p class="eyebrow">ROADMAP</p>
+        <h2>TILSMEE entsteht Schritt für Schritt.</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-row reveal">
+          <span>01</span>
+          <div><h3>Homepage und Markenauftritt</h3><p>Die öffentliche Grundlage für das gesamte TILSMEE-System.</p></div>
+          <small class="state-active">AKTIV</small>
+        </article>
+        <article class="timeline-row reveal">
+          <span>02</span>
+          <div><h3>WatchFace Studio</h3><p>Editor, Ebenen, Live-Vorschau und Export.</p></div>
+          <small>IN ENTWICKLUNG</small>
+        </article>
+        <article class="timeline-row reveal">
+          <span>03</span>
+          <div><h3>Persönliche KI</h3><p>Sprache, Wissen, Projekte und Geräte in einer Anwendung.</p></div>
+          <small>GEPLANT</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel contact" id="kontakt">
+      <div class="contact-box reveal">
+        <div class="contact-symbol">
+          <img src="tilsmee-emblem.png" alt="">
+          <span class="core-dot"></span>
+        </div>
+
+        <div class="contact-lockup">
+          <img src="tilsmee-wordmark.png" alt="TILSMEE">
+          <span class="ai">ai</span>
+        </div>
+
+        <h2>Die Entwicklung läuft.</h2>
+        <p>Neue Funktionen, Tests und Fortschritte werden hier sichtbar gemacht.</p>
+        <a class="button button-primary" href="mailto:kontakt@tilsmee.de">Kontakt aufnehmen</a>
+      </div>
+
+      <footer>
+        <div>
+          <strong>© 2026 TILSMEE. Alle Rechte vorbehalten.</strong>
+          <small>Entwickelt von Markus Smeets · Version 1.0 Alpha</small>
+        </div>
+        <nav>
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+          <a href="https://github.com/Tilsmee-ai/tilsmee-ai.github.io" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
