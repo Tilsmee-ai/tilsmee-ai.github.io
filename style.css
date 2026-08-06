@@ -284,3 +284,174 @@ footer nav a:hover{color:var(--cyan)}
 .legal section h2{font-size:1.2rem;margin:28px 0 9px}
 .legal section h2:first-child{margin-top:0}
 .legal section p{color:var(--muted);line-height:1.8}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE FINAL – LAYOUT RC1
+   Ausschließlich Layout, Abstände und Ausrichtung.
+   ========================================================= */
+
+.header,
+.panel {
+  padding-left: clamp(24px, 5.5vw, 96px);
+  padding-right: clamp(24px, 5.5vw, 96px);
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1fr) minmax(420px, .92fr);
+  gap: clamp(48px, 6vw, 92px);
+}
+
+.hero-copy {
+  max-width: 700px;
+  align-self: center;
+}
+
+.hero-lockup {
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  max-width: 720px;
+  margin-bottom: 18px;
+}
+
+.hero .lead {
+  max-width: 660px;
+  margin-bottom: 0;
+}
+
+.actions {
+  margin-top: 30px;
+}
+
+.status-line {
+  margin-top: 16px;
+}
+
+.watch-area {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+}
+
+.watch-hover {
+  width: min(520px, 41vw);
+}
+
+.watch-case {
+  margin-inline: auto;
+}
+
+.watch-logo {
+  margin-bottom: 0;
+}
+
+.time-row {
+  margin-top: 2px;
+}
+
+.watch-date {
+  margin-top: 15px;
+}
+
+.watch-weather {
+  margin-top: 6px;
+}
+
+.metrics {
+  margin-top: 24px;
+}
+
+.watch-wordmark {
+  margin-top: 15px;
+}
+
+.watch-hint {
+  margin-top: 15px;
+}
+
+.header-contact,
+.button {
+  min-height: 48px;
+}
+
+.header-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-head,
+.studio-copy {
+  max-width: 760px;
+}
+
+.feature-card,
+.timeline-row {
+  padding: 28px;
+}
+
+.feature-card h3,
+.timeline-row h3 {
+  margin-bottom: 8px;
+}
+
+.feature-card p,
+.timeline-row p {
+  margin-bottom: 0;
+}
+
+.contact-box {
+  max-width: 860px;
+  padding: 70px 34px;
+}
+
+.contact-box h2 {
+  margin-bottom: 18px;
+}
+
+.contact-box p {
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media(max-width:1000px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .watch-hover {
+    width: min(500px, 82vw);
+  }
+
+  .hero-copy {
+    max-width: 760px;
+  }
+}
+
+@media(max-width:620px) {
+  .header,
+  .panel {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero {
+    gap: 34px;
+  }
+
+  .watch-hover {
+    width: min(92vw, 460px);
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
