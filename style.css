@@ -455,3 +455,2735 @@ footer nav a:hover{color:var(--cyan)}
     width: 100%;
   }
 }
+
+
+/* =========================================================
+   TILSMEE WATCHFACE BUILD 7 – MODULARE HOMEPAGE-INTEGRATION
+   Nur der bisherige Uhrbereich der Startseite wird ersetzt.
+   ========================================================= */
+
+.watchframe-module{
+  width:min(560px,43vw);
+  aspect-ratio:1;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+
+.watchframe-iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:transparent;
+  border-radius:50%;
+  overflow:hidden;
+}
+
+@media (max-width: 980px){
+  .watchframe-module{
+    width:min(560px,84vw);
+  }
+}
+
+@media (max-width: 620px){
+  .watchframe-module{
+    width:92vw;
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 1
+   Neuer Startscreen, sonst nichts.
+   ========================================================= */
+
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:32px;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(0,122,255,.10), transparent 26%),
+    radial-gradient(circle at 50% 55%, rgba(0,210,255,.035), transparent 34%),
+    #02070d;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .85s ease, visibility .85s ease;
+}
+
+.loader.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-mark{
+  margin-bottom:26px;
+}
+
+.loader-mark img{
+  width:112px;
+  height:112px;
+  object-fit:contain;
+}
+
+.loader-name{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:8px;
+}
+
+.loader-name img{
+  width:min(330px,66vw);
+  height:auto;
+}
+
+.loader-name .ai{
+  font-size:28px;
+  line-height:1;
+  margin-bottom:5px;
+}
+
+.loader-subtitle{
+  margin:22px 0 0;
+  font-size:clamp(18px,1.5vw,25px);
+  font-weight:400;
+  color:#f4f8fc;
+  letter-spacing:.02em;
+  text-align:center;
+}
+
+.loader-version{
+  margin:10px 0 0;
+  font-size:clamp(12px,.9vw,15px);
+  color:#718298;
+  letter-spacing:.05em;
+  text-align:center;
+}
+
+.loader-button{
+  margin-top:34px;
+  padding:17px 38px;
+  border:1px solid rgba(85,220,255,.5);
+  border-radius:14px;
+  background:linear-gradient(100deg,#43d7ff 0%,#0b8cff 100%);
+  color:#00111d;
+  font:inherit;
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:.035em;
+  cursor:pointer;
+  box-shadow:
+    0 0 0 rgba(0,183,255,0),
+    0 14px 35px rgba(0,105,255,.18);
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    filter .22s ease;
+}
+
+.loader-button:hover{
+  transform:translateY(-2px) scale(1.025);
+  filter:brightness(1.08);
+  box-shadow:
+    0 0 28px rgba(0,183,255,.38),
+    0 16px 40px rgba(0,105,255,.24);
+}
+
+.loader-button:active{
+  transform:translateY(0) scale(.99);
+}
+
+.loader-hint{
+  margin:22px 0 0;
+  color:#64778d;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+@media (max-width: 620px){
+  .loader{
+    padding:24px;
+  }
+
+  .loader-mark img{
+    width:92px;
+    height:92px;
+  }
+
+  .loader-name .ai{
+    font-size:23px;
+  }
+
+  .loader-button{
+    width:min(340px,86vw);
+  }
+}
+
+/* V1.1.0 Punkt 1 – Core-Punkt exakt im Splash-Gehirn zentrieren.
+   Nur die Loader-Geometrie wird angeglichen; Bild und übriges Layout bleiben unverändert. */
+.loader-mark{
+  width:112px;
+  height:112px;
+}
+.loader-mark .core-dot{
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 2
+   Gehirn-Klick auf der Startuhr
+   ========================================================= */
+
+.watch-area{
+  position:relative;
+}
+
+.watch-assistant{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.96);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border:1px solid rgba(59,214,255,.62);
+  border-radius:999px;
+  background:rgba(2,7,13,.94);
+  color:#f7fbff;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.015em;
+  white-space:nowrap;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  z-index:30;
+  box-shadow:
+    0 0 0 rgba(0,178,255,0),
+    0 12px 32px rgba(0,0,0,.34);
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    visibility .22s ease,
+    box-shadow .22s ease;
+}
+
+.watch-assistant.show{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%,-50%) scale(1);
+  box-shadow:
+    0 0 22px rgba(0,178,255,.22),
+    0 14px 38px rgba(0,0,0,.40);
+}
+
+.watch-assistant-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#39d7ff;
+  box-shadow:
+    0 0 8px rgba(57,215,255,.9),
+    0 0 16px rgba(0,131,255,.55);
+}
+
+.watchframe-module.tilsmee-activated{
+  animation:watchActivatePulse .52s ease-out;
+}
+
+@keyframes watchActivatePulse{
+  0%{filter:brightness(1)}
+  45%{
+    filter:
+      brightness(1.10)
+      drop-shadow(0 0 12px rgba(53,211,255,.24));
+  }
+  100%{filter:brightness(1)}
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 3
+   Smartwatch-Hardware um die große Startuhr
+   ========================================================= */
+
+.smartwatch-hardware{
+  position:relative;
+  width:min(590px,46vw);
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  isolation:isolate;
+}
+
+.watch-case{
+  position:relative;
+  width:94%;
+  aspect-ratio:1;
+  border-radius:50%;
+  padding:1.45%;
+  background:
+    linear-gradient(145deg,
+      rgba(215,230,240,.72) 0%,
+      rgba(70,88,105,.70) 17%,
+      rgba(17,27,37,.96) 39%,
+      rgba(5,10,16,.98) 58%,
+      rgba(78,96,112,.66) 79%,
+      rgba(220,233,242,.52) 100%);
+  box-shadow:
+    0 28px 58px rgba(0,0,0,.46),
+    0 0 0 1px rgba(205,229,245,.28),
+    0 0 22px rgba(0,143,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.16),
+    inset 0 -14px 28px rgba(0,0,0,.38);
+  z-index:3;
+}
+
+.watch-case::before{
+  content:"";
+  position:absolute;
+  inset:1.8%;
+  border-radius:50%;
+  border:1px solid rgba(117,205,255,.20);
+  box-shadow:
+    inset 0 0 18px rgba(0,120,255,.09),
+    0 0 0 1px rgba(0,0,0,.50);
+  pointer-events:none;
+  z-index:4;
+}
+
+.watch-case::after{
+  content:"";
+  position:absolute;
+  inset:-.35%;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.09);
+  pointer-events:none;
+}
+
+.watch-case-highlight{
+  position:absolute;
+  top:4.6%;
+  left:16%;
+  width:39%;
+  height:7%;
+  border-radius:50%;
+  background:linear-gradient(90deg,transparent,rgba(235,250,255,.13),transparent);
+  filter:blur(5px);
+  transform:rotate(-18deg);
+  pointer-events:none;
+  z-index:5;
+}
+
+.watch-case .watchframe-module{
+  position:absolute;
+  inset:3.15%;
+  width:auto;
+  height:auto;
+  aspect-ratio:1;
+  z-index:2;
+}
+
+.watch-case .watchframe-iframe{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+}
+
+.watch-lug{
+  position:absolute;
+  width:14.5%;
+  height:9%;
+  border-radius:12px;
+  background:
+    linear-gradient(145deg,#758493 0%,#283642 35%,#0b1219 73%,#647381 100%);
+  border:1px solid rgba(217,236,247,.22);
+  box-shadow:
+    0 12px 20px rgba(0,0,0,.38),
+    inset 0 1px 1px rgba(255,255,255,.18),
+    inset 0 -4px 8px rgba(0,0,0,.34);
+  z-index:1;
+}
+
+.watch-lug::after{
+  content:"";
+  position:absolute;
+  left:14%;
+  right:14%;
+  top:43%;
+  height:18%;
+  border-radius:4px;
+  background:rgba(0,0,0,.58);
+}
+
+.watch-lug-top-left{top:1.2%;left:22%;transform:rotate(-19deg)}
+.watch-lug-top-right{top:1.2%;right:22%;transform:rotate(19deg)}
+.watch-lug-bottom-left{bottom:1.2%;left:22%;transform:rotate(19deg)}
+.watch-lug-bottom-right{bottom:1.2%;right:22%;transform:rotate(-19deg)}
+
+.watch-side-button{
+  position:absolute;
+  right:-1.4%;
+  top:43%;
+  width:7.2%;
+  height:13.2%;
+  border-radius:6px 12px 12px 6px;
+  background:
+    linear-gradient(90deg,#18242e 0%,#647786 48%,#b1c0ca 73%,#455562 100%);
+  border:1px solid rgba(223,240,250,.24);
+  box-shadow:
+    7px 9px 16px rgba(0,0,0,.42),
+    inset 0 1px 1px rgba(255,255,255,.24),
+    inset 0 -4px 8px rgba(0,0,0,.34);
+  z-index:2;
+}
+
+.watch-side-button-detail{
+  position:absolute;
+  left:24%;
+  top:12%;
+  width:26%;
+  height:76%;
+  border-radius:4px;
+  background:repeating-linear-gradient(
+    180deg,
+    rgba(3,8,12,.82) 0 4px,
+    rgba(140,164,179,.40) 4px 6px
+  );
+  opacity:.74;
+}
+
+.smartwatch-hardware.tilsmee-activated{
+  animation:watchHardwareActivate .52s ease-out;
+}
+
+@keyframes watchHardwareActivate{
+  0%{filter:brightness(1)}
+  45%{
+    filter:
+      brightness(1.08)
+      drop-shadow(0 0 16px rgba(53,211,255,.18));
+  }
+  100%{filter:brightness(1)}
+}
+
+@media (max-width:980px){
+  .smartwatch-hardware{width:min(590px,86vw)}
+}
+
+@media (max-width:620px){
+  .smartwatch-hardware{width:94vw}
+  .watch-side-button{right:-.6%}
+}
+
+
+/* TILSMEE 1.1.0 — PUNKT 4: INTERAKTIVE VISION */
+.vision-v110{position:relative;overflow:hidden}.vision-deck{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px;transition:.3s ease}.vision-deck.muted{opacity:.12;filter:blur(2px);transform:scale(.985);pointer-events:none}.vision-card-v110{position:relative;min-height:245px;padding:25px 22px;border:1px solid rgba(116,144,168,.22);border-radius:20px;text-align:left;color:#f5f9fc;background:linear-gradient(145deg,rgba(13,25,36,.92),rgba(4,10,17,.96));font:inherit;cursor:pointer;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}.vision-card-v110:hover,.vision-card-v110:focus-visible{transform:translateY(-9px);border-color:rgba(65,215,255,.7);box-shadow:0 22px 50px rgba(0,0,0,.3),0 0 28px rgba(0,160,255,.13);outline:none}.vision-card-v110 span{position:absolute;right:20px;top:18px;color:#607386;font-size:12px;letter-spacing:.16em}.vision-card-v110 h3{margin:58px 0 12px;font-size:22px}.vision-card-v110 p{min-height:72px;color:#899bad;line-height:1.6}.vision-card-v110 b{display:block;margin-top:18px;color:#48d9ff;font-size:11px;letter-spacing:.08em}.vision-focus{position:absolute;left:0;right:0;top:155px;z-index:20;min-height:365px;padding:30px;display:grid;grid-template-columns:56px 1fr 56px;align-items:center;border:1px solid rgba(65,215,255,.38);border-radius:25px;background:radial-gradient(circle at 76% 25%,rgba(0,145,255,.17),transparent 31%),linear-gradient(145deg,rgba(7,18,28,.99),rgba(2,7,13,.995));box-shadow:0 28px 70px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(16px) scale(.985);transition:.3s ease}.vision-focus.show{opacity:1;visibility:visible;transform:none}.vision-focus-content{text-align:center;max-width:850px;margin:auto}.vision-focus small{display:block;color:#61768b;letter-spacing:.16em;margin-bottom:15px}.vision-focus em{display:block;color:#47d9ff;font-style:normal;font-size:12px;font-weight:800;letter-spacing:.18em}.vision-focus h3{font-size:clamp(29px,3vw,47px);line-height:1.08;margin:12px auto 16px}.vision-focus p{max-width:730px;margin:auto;color:#9aabba;line-height:1.7}.vision-x{position:absolute;right:18px;top:18px;width:39px;height:39px;border-radius:50%;font-size:25px}.vision-arrow{width:46px;height:72px;border-radius:14px;font-size:34px}.vision-x,.vision-arrow{border:1px solid rgba(105,147,178,.3);background:rgba(5,14,22,.75);color:#dff7ff;cursor:pointer;transition:.2s ease}.vision-x:hover,.vision-arrow:hover{color:#47d9ff;border-color:#47d9ff;box-shadow:0 0 20px rgba(0,160,255,.13)}.vision-demo-v110{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;margin-top:32px}.vision-node-v110{padding:12px 15px;border:1px solid rgba(65,215,255,.4);border-radius:12px;background:rgba(6,16,25,.76);color:#dce9f1;font-size:11px;font-weight:800;letter-spacing:.07em}.vision-node-v110.hot{color:#50ddff;box-shadow:0 0 20px rgba(0,155,255,.13)}.vision-link-v110{width:38px;height:1px;background:#47d9ff;box-shadow:0 0 8px rgba(71,217,255,.35)}.vision-hint-v110{text-align:center;margin-top:18px;color:#52687b;font-size:11px;letter-spacing:.09em;text-transform:uppercase}@media(max-width:900px){.vision-deck{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.vision-deck{grid-template-columns:1fr}.vision-focus{position:fixed;inset:18px;min-height:0;grid-template-columns:40px 1fr 40px;padding:20px 10px;z-index:9998}.vision-arrow{width:36px;height:58px}.vision-card-v110{min-height:205px}}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.1
+   Smartphone-Zukunftsdemo
+   ========================================================= */
+
+.device-demo-trigger{
+  font:inherit;
+  cursor:pointer;
+  transition:transform .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+
+.device-demo-trigger:hover,
+.device-demo-trigger:focus-visible{
+  transform:translateY(-3px);
+  border-color:rgba(79,222,255,.82)!important;
+  color:#58e0ff!important;
+  background:rgba(8,29,43,.9)!important;
+  box-shadow:0 0 22px rgba(0,156,255,.17);
+  outline:none;
+}
+
+.device-concept-panel{
+  position:absolute;
+  inset:14px;
+  z-index:60;
+  display:grid;
+  grid-template-columns:minmax(280px,.85fr) minmax(300px,1.15fr);
+  align-items:center;
+  gap:34px;
+  padding:34px 48px;
+  border:1px solid rgba(72,215,255,.44);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 74% 38%,rgba(0,149,255,.16),transparent 29%),
+    linear-gradient(145deg,rgba(4,16,25,.995),rgba(1,6,11,.998));
+  box-shadow:0 32px 80px rgba(0,0,0,.58),0 0 34px rgba(0,160,255,.08);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(14px) scale(.985);
+  pointer-events:none;
+  transition:opacity .28s ease,visibility .28s ease,transform .28s cubic-bezier(.2,.8,.2,1);
+}
+
+.device-concept-panel.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+
+.device-concept-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(102,142,171,.32);
+  border-radius:50%;
+  background:rgba(3,12,19,.78);
+  color:#dff7ff;
+  font-size:25px;
+  line-height:1;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.device-concept-close:hover{
+  border-color:rgba(68,218,255,.78);
+  color:#43d7ff;
+  box-shadow:0 0 18px rgba(0,158,255,.13);
+}
+
+.device-concept-copy{
+  max-width:440px;
+}
+
+.device-concept-label{
+  display:block;
+  margin-bottom:15px;
+  color:#43d7ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+}
+
+.device-concept-copy h4{
+  margin:0 0 15px;
+  font-size:clamp(30px,3vw,48px);
+  line-height:1.06;
+}
+
+.device-concept-copy p{
+  margin:0;
+  color:#91a2b3;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.phone-concept{
+  display:grid;
+  place-items:center;
+  min-height:470px;
+}
+
+.phone-shell{
+  position:relative;
+  width:248px;
+  aspect-ratio:.49;
+  padding:8px;
+  border-radius:38px;
+  background:linear-gradient(145deg,#8d9aa5 0%,#28343e 22%,#080d12 55%,#667581 82%,#bac6ce 100%);
+  box-shadow:0 28px 56px rgba(0,0,0,.52),0 0 0 1px rgba(226,242,250,.23),0 0 30px rgba(0,151,255,.10);
+}
+
+.phone-shell::before{
+  content:"";
+  position:absolute;
+  left:-3px;
+  top:115px;
+  width:3px;
+  height:52px;
+  border-radius:3px 0 0 3px;
+  background:#64737e;
+  box-shadow:0 70px 0 #64737e;
+}
+
+.phone-shell::after{
+  content:"";
+  position:absolute;
+  right:-3px;
+  top:138px;
+  width:3px;
+  height:78px;
+  border-radius:0 3px 3px 0;
+  background:#64737e;
+}
+
+.phone-screen{
+  position:relative;
+  height:100%;
+  overflow:hidden;
+  padding:18px 15px 15px;
+  border-radius:31px;
+  background:radial-gradient(circle at 50% 8%,rgba(0,159,255,.13),transparent 24%),linear-gradient(180deg,#06111a,#02070d 62%);
+  color:#eef8ff;
+}
+
+.phone-speaker{
+  position:absolute;
+  top:12px;
+  left:50%;
+  z-index:4;
+  width:52px;
+  height:6px;
+  border-radius:999px;
+  transform:translateX(-50%);
+  background:#05080b;
+}
+
+.phone-camera{
+  position:absolute;
+  top:12px;
+  left:calc(50% + 34px);
+  z-index:4;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#020609;
+  box-shadow:inset 0 0 3px rgba(0,149,255,.6);
+}
+
+.phone-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:3px 5px 17px;
+  color:#90a6b9;
+  font-size:8px;
+  letter-spacing:.03em;
+}
+
+.phone-status-right{color:#71879a}
+
+.phone-tilsmee-head{
+  display:grid;
+  grid-template-columns:36px 1fr 10px;
+  align-items:center;
+  gap:10px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(90,134,166,.18);
+}
+
+.phone-tilsmee-head img{
+  width:36px;
+  height:36px;
+  object-fit:cover;
+  border-radius:50%;
+  filter:drop-shadow(0 0 6px rgba(0,166,255,.28));
+}
+
+.phone-tilsmee-head strong{
+  display:block;
+  font-size:12px;
+  letter-spacing:.09em;
+}
+
+.phone-tilsmee-head small{
+  display:block;
+  margin-top:2px;
+  color:#688297;
+  font-size:7px;
+}
+
+.phone-ready-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#35d9ff;
+  box-shadow:0 0 8px #20baff;
+}
+
+.phone-greeting{padding:30px 2px 22px}
+.phone-greeting span{color:#738ca0;font-size:9px}
+.phone-greeting h5{margin:6px 0 0;font-size:23px;line-height:1.08}
+
+.phone-action-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.phone-action{
+  min-width:0;
+  padding:12px 7px 10px;
+  border:1px solid rgba(82,135,171,.22);
+  border-radius:12px;
+  background:rgba(7,20,30,.88);
+  color:#d8e6ef;
+  text-align:left;
+}
+
+.phone-action-icon{
+  display:block;
+  margin-bottom:9px;
+  color:#3fd7ff;
+  font-size:16px;
+}
+
+.phone-action strong{display:block;font-size:8px}
+.phone-action small{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:#627b90;
+  font-size:6px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.phone-context-card{
+  margin-top:12px;
+  padding:13px;
+  border:1px solid rgba(55,209,255,.28);
+  border-radius:13px;
+  background:linear-gradient(135deg,rgba(5,28,42,.92),rgba(5,15,24,.78));
+}
+
+.phone-context-kicker{
+  display:block;
+  margin-bottom:5px;
+  color:#45d9ff;
+  font-size:6px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.phone-context-card strong{display:block;font-size:9px}
+.phone-context-card small{display:block;margin-top:4px;color:#657f94;font-size:7px}
+
+.phone-input{
+  position:absolute;
+  left:15px;
+  right:15px;
+  bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:38px;
+  padding:0 8px 0 12px;
+  border:1px solid rgba(93,135,164,.28);
+  border-radius:14px;
+  background:rgba(5,14,22,.93);
+  color:#60798d;
+  font-size:8px;
+}
+
+.phone-mic{
+  display:grid;
+  place-items:center;
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  background:linear-gradient(135deg,#43d7ff,#0b8cff);
+  color:#00111d;
+  font-size:12px;
+}
+
+@media (max-width:900px){
+  .device-concept-panel{
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    padding:28px;
+  }
+  .phone-shell{width:215px}
+  .phone-concept{min-height:420px}
+}
+
+@media (max-width:620px){
+  .device-concept-panel{
+    position:fixed;
+    inset:12px;
+    grid-template-columns:1fr;
+    overflow:auto;
+    padding:54px 20px 28px;
+  }
+  .device-concept-copy{text-align:center}
+  .phone-shell{width:225px}
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.1a
+   Smartphone Detail-Zoom
+   ========================================================= */
+
+.phone-concept{
+  cursor:zoom-in;
+}
+
+.phone-zoom-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  display:grid;
+  place-items:center;
+  padding:28px;
+  background:rgba(0,4,8,.82);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .28s ease, visibility .28s ease;
+}
+
+.phone-zoom-backdrop.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.phone-zoom-stage{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:min(720px,92vw);
+  max-height:92vh;
+  padding:50px 42px 34px;
+  border:1px solid rgba(69,219,255,.34);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 36%,rgba(0,157,255,.16),transparent 34%),
+    linear-gradient(145deg,rgba(5,16,25,.985),rgba(1,6,11,.995));
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.65),
+    0 0 42px rgba(0,157,255,.10);
+  transform:scale(.76) translateY(26px);
+  opacity:0;
+  transition:
+    transform .34s cubic-bezier(.16,.84,.22,1),
+    opacity .28s ease;
+}
+
+.phone-zoom-backdrop.show .phone-zoom-stage{
+  transform:scale(1) translateY(0);
+  opacity:1;
+}
+
+.phone-zoom-label{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#45d9ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.16em;
+  white-space:nowrap;
+}
+
+.phone-zoom-close{
+  position:fixed;
+  top:28px;
+  right:34px;
+  z-index:12002;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(99,144,176,.38);
+  border-radius:50%;
+  background:rgba(2,10,16,.88);
+  color:#f3fbff;
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.phone-zoom-close:hover{
+  color:#45d9ff;
+  border-color:rgba(69,219,255,.8);
+  box-shadow:0 0 22px rgba(0,163,255,.18);
+}
+
+#phoneZoomMount{
+  display:grid;
+  place-items:center;
+  width:100%;
+}
+
+#phoneZoomMount .phone-shell{
+  width:min(420px,58vw);
+  max-height:76vh;
+  transform:none !important;
+  box-shadow:
+    0 34px 70px rgba(0,0,0,.6),
+    0 0 0 1px rgba(226,242,250,.24),
+    0 0 42px rgba(0,151,255,.14);
+}
+
+.phone-zoom-backdrop .phone-screen{
+  font-size:1.35em;
+}
+
+.phone-zoom-backdrop .phone-tilsmee-head img{
+  width:48px;
+  height:48px;
+}
+
+.phone-zoom-backdrop .phone-tilsmee-head strong{
+  font-size:16px;
+}
+
+.phone-zoom-backdrop .phone-tilsmee-head small{
+  font-size:9px;
+}
+
+.phone-zoom-backdrop .phone-greeting span{
+  font-size:11px;
+}
+
+.phone-zoom-backdrop .phone-greeting h5{
+  font-size:34px;
+}
+
+.phone-zoom-backdrop .phone-action strong{
+  font-size:11px;
+}
+
+.phone-zoom-backdrop .phone-action small{
+  font-size:8px;
+}
+
+.phone-zoom-backdrop .phone-context-card strong{
+  font-size:12px;
+}
+
+.phone-zoom-backdrop .phone-context-card small{
+  font-size:9px;
+}
+
+.phone-zoom-backdrop .phone-input{
+  font-size:10px;
+}
+
+@media (max-width:620px){
+  .phone-zoom-backdrop{
+    padding:14px;
+  }
+
+  .phone-zoom-stage{
+    width:100%;
+    max-height:96vh;
+    padding:46px 14px 24px;
+  }
+
+  #phoneZoomMount .phone-shell{
+    width:min(360px,78vw);
+    max-height:80vh;
+  }
+
+  .phone-zoom-close{
+    top:16px;
+    right:16px;
+  }
+}
+
+/* =========================================================
+   TILSMEE 1.1.0 – PUNKT 4.1c
+   Korrektur: Smartphone-Proportion + Textposition
+   Keine Bilddateien verändert.
+   ========================================================= */
+
+/* Seitlichen Konzepttext im vorhandenen Rahmen höher setzen */
+.device-concept-copy{
+  transform:translateY(-46px);
+}
+
+/* Zoom-Smartphone strikt proportional skalieren.
+   Die Breite wird aus der verfügbaren Höhe abgeleitet,
+   damit aspect-ratio .49 niemals auseinandergezogen wird. */
+#phoneZoomMount .phone-shell{
+  width:min(420px,58vw,calc(76vh * .49));
+  height:auto;
+  max-height:none;
+  aspect-ratio:.49;
+}
+
+@media (max-width:900px){
+  .device-concept-copy{
+    transform:translateY(-28px);
+  }
+}
+
+@media (max-width:620px){
+  .device-concept-copy{
+    transform:none;
+  }
+
+  #phoneZoomMount .phone-shell{
+    width:min(360px,78vw,calc(80vh * .49));
+    height:auto;
+    max-height:none;
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.2 SMARTWATCH-DEMO
+   ========================================================= */
+.watch-concept-panel{position:absolute;inset:14px;z-index:61;display:grid;grid-template-columns:minmax(280px,.85fr) minmax(320px,1.15fr);align-items:center;gap:34px;padding:34px 48px;border:1px solid rgba(72,215,255,.44);border-radius:24px;background:radial-gradient(circle at 74% 38%,rgba(0,149,255,.16),transparent 29%),linear-gradient(145deg,rgba(4,16,25,.995),rgba(1,6,11,.998));box-shadow:0 32px 80px rgba(0,0,0,.58),0 0 34px rgba(0,160,255,.08);opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);pointer-events:none;transition:opacity .28s ease,visibility .28s ease,transform .28s cubic-bezier(.2,.8,.2,1)}
+.watch-concept-panel.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.watch-concept-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid rgba(102,142,171,.32);border-radius:50%;background:rgba(3,12,19,.78);color:#dff7ff;font-size:25px;line-height:1;cursor:pointer}.watch-concept-close:hover{border-color:rgba(68,218,255,.78);color:#43d7ff;box-shadow:0 0 18px rgba(0,158,255,.13)}
+.watch-concept-copy{max-width:440px;align-self:start;margin-top:46px}.watch-concept-copy h4{margin:0 0 15px;font-size:clamp(30px,3vw,48px);line-height:1.06}.watch-concept-copy p{margin:0;color:#91a2b3;font-size:15px;line-height:1.7}
+.watch-concept-visual{display:grid;place-items:center;min-height:470px;cursor:zoom-in;outline:none}.watch-concept-visual:focus-visible .concept-watch{filter:drop-shadow(0 0 20px rgba(53,211,255,.25))}
+.concept-watch{width:min(390px,32vw)!important}
+.watch-zoom-backdrop{position:fixed;inset:0;z-index:12000;display:grid;place-items:center;padding:28px;background:rgba(0,4,8,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}.watch-zoom-backdrop.show{opacity:1;visibility:visible;pointer-events:auto}
+.watch-zoom-stage{position:relative;display:grid;place-items:center;width:min(760px,92vw);height:min(760px,90vh);padding:54px 42px 34px;border:1px solid rgba(69,219,255,.34);border-radius:28px;background:radial-gradient(circle at 50% 45%,rgba(0,157,255,.16),transparent 36%),linear-gradient(145deg,rgba(5,16,25,.985),rgba(1,6,11,.995));box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 42px rgba(0,157,255,.10);transform:scale(.76) translateY(26px);opacity:0;transition:transform .34s cubic-bezier(.16,.84,.22,1),opacity .28s ease}.watch-zoom-backdrop.show .watch-zoom-stage{transform:scale(1) translateY(0);opacity:1}
+#watchZoomMount{display:grid;place-items:center;width:100%;height:100%}#watchZoomMount .concept-watch{width:min(600px,72vh,78vw)!important}
+@media(max-width:900px){.watch-concept-panel{grid-template-columns:1fr 1fr;gap:18px;padding:28px}.concept-watch{width:min(330px,38vw)!important}}
+@media(max-width:620px){.watch-concept-panel{position:fixed;inset:12px;grid-template-columns:1fr;overflow:auto;padding:54px 20px 28px}.watch-concept-copy{text-align:center;margin-top:0}.watch-concept-visual{min-height:360px}.concept-watch{width:min(320px,78vw)!important}.watch-zoom-stage{width:100%;height:min(680px,92vh);padding:48px 12px 20px}#watchZoomMount .concept-watch{width:min(520px,82vw)!important}}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.3 PC-ZUKUNFTSDEMO
+   ========================================================= */
+.pc-concept-panel{position:absolute;inset:14px;z-index:62;display:grid;grid-template-columns:minmax(270px,.72fr) minmax(430px,1.28fr);align-items:center;gap:28px;padding:34px 44px;border:1px solid rgba(72,215,255,.44);border-radius:24px;background:radial-gradient(circle at 72% 38%,rgba(0,149,255,.14),transparent 32%),linear-gradient(145deg,rgba(4,16,25,.995),rgba(1,6,11,.998));box-shadow:0 32px 80px rgba(0,0,0,.58),0 0 34px rgba(0,160,255,.08);opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);pointer-events:none;transition:opacity .28s ease,visibility .28s ease,transform .28s cubic-bezier(.2,.8,.2,1)}
+.pc-concept-panel.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.pc-concept-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid rgba(102,142,171,.32);border-radius:50%;background:rgba(3,12,19,.78);color:#dff7ff;font-size:25px;line-height:1;cursor:pointer}.pc-concept-close:hover{border-color:rgba(68,218,255,.78);color:#43d7ff;box-shadow:0 0 18px rgba(0,158,255,.13)}
+.pc-concept-copy{max-width:410px;align-self:start;margin-top:46px}.pc-concept-copy h4{margin:0 0 15px;font-size:clamp(29px,3vw,46px);line-height:1.06}.pc-concept-copy p{margin:0;color:#91a2b3;font-size:15px;line-height:1.7}
+.pc-concept-visual{display:grid;place-items:center;min-height:455px;cursor:zoom-in;outline:none}
+.pc-device{width:min(560px,48vw);filter:drop-shadow(0 25px 32px rgba(0,0,0,.5))}
+.pc-monitor{padding:8px;border-radius:20px;background:linear-gradient(145deg,#8796a3,#25323d 24%,#070d12 62%,#6c7c88);box-shadow:0 0 0 1px rgba(225,241,250,.2),0 0 28px rgba(0,151,255,.08)}
+.pc-screen{aspect-ratio:16/10;overflow:hidden;border-radius:13px;background:radial-gradient(circle at 65% 15%,rgba(0,151,255,.12),transparent 32%),#030a10;color:#eef8ff}
+.pc-topbar{height:12%;display:flex;align-items:center;justify-content:space-between;padding:0 4%;border-bottom:1px solid rgba(79,127,160,.2);background:rgba(4,13,20,.9)}
+.pc-brand{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.1em}.pc-brand img{width:23px;height:23px;object-fit:cover;border-radius:50%;filter:drop-shadow(0 0 5px rgba(0,174,255,.28))}
+.pc-ready{display:flex;align-items:center;gap:5px;color:#6f879a;font-size:6px;letter-spacing:.12em}.pc-ready i{width:6px;height:6px;border-radius:50%;background:#39d9ff;box-shadow:0 0 7px #20baff}
+.pc-layout{display:grid;grid-template-columns:25% 75%;height:88%}
+.pc-sidebar{display:flex;flex-direction:column;gap:5px;padding:7% 8%;border-right:1px solid rgba(74,120,151,.18);background:rgba(3,10,16,.78)}.pc-sidebar b{margin-bottom:7px;color:#4bdcff;font-size:6px;letter-spacing:.14em}.pc-sidebar span{padding:7px 8px;border-radius:7px;color:#6d8497;font-size:7px}.pc-sidebar span.active{color:#dff7ff;background:rgba(20,71,98,.34);border:1px solid rgba(58,205,255,.18)}
+.pc-main{position:relative;padding:5% 5% 12%}.pc-main>small{color:#668094;font-size:6px;letter-spacing:.14em}.pc-main h5{margin:4px 0 12px;font-size:18px}
+.pc-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pc-cards>div{padding:10px;border:1px solid rgba(72,129,164,.2);border-radius:9px;background:rgba(7,20,30,.72)}.pc-cards em{display:block;color:#42d8ff;font-size:5px;font-style:normal;letter-spacing:.12em}.pc-cards strong{display:block;margin:5px 0 3px;font-size:8px}.pc-cards span{color:#61798d;font-size:6px}
+.pc-work{margin-top:8px;padding:10px;border:1px solid rgba(72,129,164,.17);border-radius:9px;background:rgba(5,15,23,.55)}.pc-work-head{display:flex;justify-content:space-between;font-size:7px}.pc-work-head span{color:#5e788c;font-size:6px}.pc-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.pc-work-grid span{padding:7px;border-radius:7px;background:rgba(11,29,41,.7);color:#71899b;font-size:6px}.pc-work-grid b{display:block;margin-bottom:2px;color:#dff8ff;font-size:10px}
+.pc-input{position:absolute;left:5%;right:5%;bottom:5%;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 10px;border:1px solid rgba(84,135,168,.25);border-radius:9px;background:rgba(4,13,20,.9);color:#5f788b;font-size:6px}.pc-input b{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#43d7ff,#0b8cff);color:#00111d}
+.pc-neck{width:14%;height:32px;margin:auto;background:linear-gradient(90deg,#26333d,#8997a1,#26333d)}
+.pc-base{width:35%;height:9px;margin:auto;border-radius:50% 50% 7px 7px;background:linear-gradient(90deg,#25323c,#87959f,#25323c);box-shadow:0 8px 12px rgba(0,0,0,.35)}
+.pc-zoom-backdrop{position:fixed;inset:0;z-index:12020;display:grid;place-items:center;padding:26px;background:rgba(0,4,8,.84);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;pointer-events:none;transition:.28s ease}.pc-zoom-backdrop.show{opacity:1;visibility:visible;pointer-events:auto}
+.pc-zoom-stage{position:relative;display:grid;place-items:center;width:min(1120px,94vw);height:min(760px,90vh);padding:52px 28px 28px;border:1px solid rgba(69,219,255,.34);border-radius:28px;background:radial-gradient(circle at 50% 36%,rgba(0,157,255,.13),transparent 38%),linear-gradient(145deg,rgba(5,16,25,.985),rgba(1,6,11,.995));box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 42px rgba(0,157,255,.10);transform:scale(.8) translateY(22px);opacity:0;transition:transform .34s cubic-bezier(.16,.84,.22,1),opacity .28s ease}.pc-zoom-backdrop.show .pc-zoom-stage{transform:scale(1);opacity:1}
+.pc-zoom-label{position:absolute;top:18px;left:50%;transform:translateX(-50%);color:#45d9ff;font-size:11px;font-weight:800;letter-spacing:.16em;white-space:nowrap}.pc-zoom-close{position:fixed;top:28px;right:34px;z-index:12022;width:46px;height:46px;border:1px solid rgba(99,144,176,.38);border-radius:50%;background:rgba(2,10,16,.88);color:#f3fbff;font-size:30px;line-height:1;cursor:pointer}
+#pcZoomMount{display:grid;place-items:center;width:100%}#pcZoomMount .pc-device{width:min(920px,82vw)}
+@media(max-width:900px){.pc-concept-panel{grid-template-columns:1fr 1.35fr;gap:18px;padding:28px}.pc-device{width:min(520px,54vw)}}
+@media(max-width:620px){.pc-concept-panel{position:fixed;inset:12px;grid-template-columns:1fr;overflow:auto;padding:54px 18px 28px}.pc-concept-copy{text-align:center;margin-top:0}.pc-concept-visual{min-height:300px}.pc-device{width:88vw}.pc-zoom-stage{width:100%;height:auto;min-height:72vh;padding:48px 10px 20px}#pcZoomMount .pc-device{width:90vw}}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.4 AUTO-INFOTAINMENT
+   ========================================================= */
+.auto-concept-panel{
+  position:absolute;inset:14px;z-index:64;
+  display:grid;grid-template-columns:minmax(260px,.72fr) minmax(460px,1.28fr);
+  align-items:center;gap:26px;padding:34px 42px;
+  border:1px solid rgba(72,215,255,.44);border-radius:24px;
+  background:radial-gradient(circle at 70% 40%,rgba(0,149,255,.13),transparent 34%),linear-gradient(145deg,rgba(4,16,25,.995),rgba(1,6,11,.998));
+  box-shadow:0 32px 80px rgba(0,0,0,.58),0 0 34px rgba(0,160,255,.08);
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);pointer-events:none;
+  transition:opacity .28s ease,visibility .28s ease,transform .28s cubic-bezier(.2,.8,.2,1)
+}
+.auto-concept-panel.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.auto-concept-close{
+  position:absolute;top:16px;right:16px;width:38px;height:38px;
+  border:1px solid rgba(102,142,171,.32);border-radius:50%;
+  background:rgba(3,12,19,.78);color:#dff7ff;font-size:25px;line-height:1;cursor:pointer
+}
+.auto-concept-close:hover{border-color:rgba(68,218,255,.78);color:#43d7ff;box-shadow:0 0 18px rgba(0,158,255,.13)}
+.auto-concept-copy{max-width:410px;align-self:start;margin-top:46px}
+.auto-concept-copy h4{margin:0 0 15px;font-size:clamp(29px,3vw,46px);line-height:1.06}
+.auto-concept-copy p{margin:0;color:#91a2b3;font-size:15px;line-height:1.7}
+
+.cockpit-concept{display:grid;place-items:center;min-height:450px}
+.dashboard-shell{
+  position:relative;width:min(600px,50vw);aspect-ratio:1.9;
+  border-radius:34px 34px 20px 20px;
+  background:linear-gradient(180deg,#26303a 0%,#0c1319 17%,#05090d 62%,#111a21 100%);
+  box-shadow:0 28px 60px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -18px 28px rgba(0,0,0,.38),0 0 30px rgba(0,151,255,.07);
+  overflow:hidden
+}
+.dashboard-top{
+  position:absolute;inset:0 0 30%;
+  display:grid;grid-template-columns:28% 46% 26%;
+  align-items:end;padding:8% 5% 0;
+  background:radial-gradient(circle at 50% 10%,rgba(255,255,255,.035),transparent 40%),linear-gradient(180deg,#141c23,#090e13)
+}
+.driver-cluster{
+  position:relative;align-self:center;justify-self:center;width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle,#07131b 0 43%,#02070b 44% 100%);
+  border:1px solid rgba(61,190,238,.17);box-shadow:inset 0 0 18px rgba(0,117,181,.12)
+}
+.cluster-arc{
+  position:absolute;inset:10px;border-radius:50%;border:4px solid transparent;
+  border-top-color:#38d9ff;border-right-color:#0b8cff;transform:rotate(-42deg);
+  filter:drop-shadow(0 0 5px rgba(0,166,255,.4))
+}
+.cluster-speed{position:absolute;inset:32px 0 auto;text-align:center;color:#eefaff;font-size:28px;font-weight:700}
+.cluster-unit{position:absolute;top:65px;width:100%;text-align:center;color:#6f8798;font-size:8px}
+.cluster-small{position:absolute;bottom:14px;width:100%;text-align:center;color:#4a6578;font-size:7px}
+
+.infotainment-frame{
+  position:relative;align-self:center;width:100%;aspect-ratio:1.58;padding:5px;border-radius:15px;
+  background:linear-gradient(145deg,#8795a0,#1e2a33 28%,#080d12 62%,#667783);
+  box-shadow:0 10px 22px rgba(0,0,0,.42),0 0 0 1px rgba(222,241,250,.16),0 0 20px rgba(0,151,255,.07);
+  cursor:zoom-in;outline:none;transition:transform .2s ease,box-shadow .2s ease
+}
+.infotainment-frame:hover,.infotainment-frame:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:0 14px 28px rgba(0,0,0,.48),0 0 0 1px rgba(72,215,255,.32),0 0 26px rgba(0,151,255,.12)
+}
+.infotainment-screen{
+  position:relative;height:100%;overflow:hidden;border-radius:11px;
+  background:radial-gradient(circle at 70% 18%,rgba(0,158,255,.12),transparent 30%),linear-gradient(180deg,#06111a,#02070d 70%);
+  color:#eef8ff
+}
+.car-topbar{height:20%;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid rgba(80,130,161,.18)}
+.car-brand{display:flex;align-items:center;gap:9px}
+.car-brand img{width:30px;height:30px;object-fit:cover;border-radius:50%;filter:drop-shadow(0 0 5px rgba(0,173,255,.3))}
+.car-brand strong{display:block;font-size:10px;letter-spacing:.08em}
+.car-brand small{display:block;margin-top:1px;color:#678095;font-size:6px}
+.car-clock{color:#7d95a8;font-size:9px}
+.car-main{position:relative;height:80%;padding:4% 5% 10%}
+.car-kicker{color:#49d9ff;font-size:5px;font-weight:800;letter-spacing:.13em}
+.car-assistant h5{margin:3px 0 2px;font-size:17px}
+.car-assistant p{margin:0;color:#6d8395;font-size:7px}
+.car-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.car-card{padding:9px 7px;border:1px solid rgba(75,133,170,.2);border-radius:9px;background:rgba(7,20,30,.72)}
+.car-icon{display:block;margin-bottom:6px;color:#3fd7ff;font-size:14px}
+.car-card strong{display:block;font-size:7px}
+.car-card small{display:block;margin-top:2px;color:#60798d;font-size:5px}
+.car-bottomline{position:absolute;left:5%;right:5%;bottom:4%;display:flex;align-items:center;justify-content:space-between;color:#566f83;font-size:6px}
+.car-ready{display:flex;align-items:center;gap:5px}
+.car-ready i{width:6px;height:6px;border-radius:50%;background:#39d9ff;box-shadow:0 0 7px #20baff}
+.passenger-trim{align-self:center;justify-self:end;width:84%;height:12px;border-radius:999px;background:linear-gradient(90deg,#101820,#65737e,#1b242b);box-shadow:inset 0 1px 1px rgba(255,255,255,.07)}
+.dashboard-lower{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,#11181f,#05090d 70%);border-top:1px solid rgba(255,255,255,.04)}
+.steering-wheel{
+  position:absolute;left:9%;bottom:-45%;width:125px;height:125px;
+  border:14px solid #151d24;border-radius:50%;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.03),0 12px 24px rgba(0,0,0,.35)
+}
+.steering-wheel::before,.steering-wheel::after{content:"";position:absolute;top:45px;width:44px;height:13px;background:#151d24}
+.steering-wheel::before{left:4px;transform:rotate(18deg)}
+.steering-wheel::after{right:4px;transform:rotate(-18deg)}
+.steering-center{position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;transform:translate(-50%,-50%);background:#202b34;border:1px solid rgba(255,255,255,.06)}
+.console-strip{position:absolute;left:43%;right:16%;top:30%;display:flex;gap:9px}
+.console-strip span{flex:1;height:8px;border-radius:999px;background:#182129;box-shadow:inset 0 1px 1px rgba(255,255,255,.04)}
+
+.auto-zoom-backdrop{
+  position:fixed;inset:0;z-index:12030;display:grid;place-items:center;padding:26px;
+  background:rgba(0,4,8,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;transition:.28s ease
+}
+.auto-zoom-backdrop.show{opacity:1;visibility:visible;pointer-events:auto}
+.auto-zoom-stage{
+  position:relative;display:grid;place-items:center;width:min(1050px,94vw);height:min(690px,88vh);
+  padding:54px 26px 26px;border:1px solid rgba(69,219,255,.34);border-radius:28px;
+  background:radial-gradient(circle at 50% 38%,rgba(0,157,255,.13),transparent 38%),linear-gradient(145deg,rgba(5,16,25,.985),rgba(1,6,11,.995));
+  box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 42px rgba(0,157,255,.10);
+  transform:scale(.8) translateY(22px);opacity:0;
+  transition:transform .34s cubic-bezier(.16,.84,.22,1),opacity .28s ease
+}
+.auto-zoom-backdrop.show .auto-zoom-stage{transform:scale(1);opacity:1}
+.auto-zoom-label{position:absolute;top:18px;left:50%;transform:translateX(-50%);color:#45d9ff;font-size:11px;font-weight:800;letter-spacing:.16em;white-space:nowrap}
+.auto-zoom-close{position:fixed;top:28px;right:34px;z-index:12032;width:46px;height:46px;border:1px solid rgba(99,144,176,.38);border-radius:50%;background:rgba(2,10,16,.88);color:#f3fbff;font-size:30px;line-height:1;cursor:pointer}
+#autoZoomMount{display:grid;place-items:center;width:100%}
+#autoZoomMount .infotainment-frame{width:min(920px,82vw);aspect-ratio:1.58;transform:none!important;cursor:default}
+#autoZoomMount .car-brand img{width:46px;height:46px}
+#autoZoomMount .car-brand strong{font-size:18px}
+#autoZoomMount .car-brand small{font-size:10px}
+#autoZoomMount .car-clock{font-size:14px}
+#autoZoomMount .car-kicker{font-size:9px}
+#autoZoomMount .car-assistant h5{font-size:32px}
+#autoZoomMount .car-assistant p{font-size:11px}
+#autoZoomMount .car-icon{font-size:28px}
+#autoZoomMount .car-card strong{font-size:13px}
+#autoZoomMount .car-card small{font-size:9px}
+#autoZoomMount .car-bottomline{font-size:10px}
+
+@media(max-width:900px){
+  .auto-concept-panel{grid-template-columns:1fr 1.3fr;gap:18px;padding:28px}
+  .dashboard-shell{width:min(570px,55vw)}
+}
+@media(max-width:620px){
+  .auto-concept-panel{position:fixed;inset:12px;grid-template-columns:1fr;overflow:auto;padding:54px 18px 28px}
+  .auto-concept-copy{text-align:center;margin-top:0}
+  .cockpit-concept{min-height:300px}
+  .dashboard-shell{width:90vw}
+  .auto-zoom-stage{width:100%;height:auto;min-height:70vh;padding:48px 10px 20px}
+  #autoZoomMount .infotainment-frame{width:90vw}
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 4.4a
+   Infotainment-Inhalte unter Navigation / Musik / Telefon / TILSMEE
+   ========================================================= */
+
+.car-detail-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-top:7px;
+}
+
+.car-detail{
+  min-height:76px;
+  padding:8px;
+  border:1px solid rgba(75,133,170,.16);
+  border-radius:8px;
+  background:rgba(5,15,23,.58);
+  color:#dceaf2;
+  overflow:hidden;
+}
+
+/* Navigation */
+.car-nav-detail{
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:5px;
+}
+
+.nav-map{
+  position:relative;
+  min-height:45px;
+  border-radius:6px;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    #07131b;
+  background-size:13px 13px;
+}
+
+.nav-road,
+.nav-route{
+  position:absolute;
+  display:block;
+  height:2px;
+  border-radius:999px;
+  transform-origin:left center;
+}
+
+.nav-road{
+  background:rgba(95,116,132,.28);
+}
+
+.nav-road-a{width:74%;left:8%;top:28%;transform:rotate(18deg)}
+.nav-road-b{width:88%;left:4%;top:62%;transform:rotate(-14deg)}
+.nav-road-c{width:52%;left:38%;top:42%;transform:rotate(72deg)}
+
+.nav-route{
+  background:#35d9ff;
+  box-shadow:0 0 7px rgba(32,186,255,.5);
+}
+
+.nav-route-a{width:48%;left:16%;top:66%;transform:rotate(-13deg)}
+.nav-route-b{width:34%;left:56%;top:50%;transform:rotate(-58deg)}
+
+.nav-position{
+  position:absolute;
+  left:58%;
+  top:43%;
+  color:#54e1ff;
+  font-size:10px;
+  transform:rotate(-20deg);
+  text-shadow:0 0 7px rgba(32,186,255,.7);
+}
+
+.nav-info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:4px;
+}
+
+.nav-info strong{
+  font-size:6px;
+}
+
+.nav-info span{
+  color:#648095;
+  font-size:5px;
+  white-space:nowrap;
+}
+
+/* Musik */
+.car-music-detail{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.music-kicker{
+  color:#43d7ff;
+  font-size:5px;
+  font-weight:800;
+  letter-spacing:.1em;
+}
+
+.car-music-detail strong{
+  margin-top:3px;
+  font-size:7px;
+}
+
+.music-artist{
+  margin-top:1px;
+  color:#698195;
+  font-size:5px;
+}
+
+.music-progress{
+  position:relative;
+  height:2px;
+  margin:7px 0 4px;
+  border-radius:999px;
+  background:rgba(92,118,136,.22);
+  overflow:hidden;
+}
+
+.music-progress i{
+  display:block;
+  width:47%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#42d8ff,#0b8cff);
+  box-shadow:0 0 6px rgba(0,158,255,.35);
+}
+
+.music-controls{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#587287;
+  font-size:5px;
+}
+
+.music-controls button{
+  display:grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:rgba(49,211,255,.12);
+  color:#46d9ff;
+  font-size:7px;
+}
+
+/* Telefon bewusst ruhiger */
+.car-phone-detail{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(4,12,18,.38);
+}
+
+.phone-status-dot{
+  width:7px;
+  height:7px;
+  margin-bottom:6px;
+  border-radius:50%;
+  background:#42d8ff;
+  box-shadow:0 0 8px rgba(32,186,255,.65);
+}
+
+.car-phone-detail strong{
+  font-size:6px;
+}
+
+.car-phone-detail span{
+  margin-top:2px;
+  color:#60798d;
+  font-size:5px;
+}
+
+/* Kalender */
+.car-calendar-detail{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(72,129,164,.15);
+}
+
+.calendar-head span{
+  color:#43d7ff;
+  font-size:5px;
+  font-weight:800;
+  letter-spacing:.1em;
+}
+
+.calendar-head strong{
+  font-size:6px;
+}
+
+.calendar-item{
+  display:grid;
+  grid-template-columns:30px 1fr;
+  gap:5px;
+  align-items:center;
+}
+
+.calendar-item time{
+  color:#44d9ff;
+  font-size:5px;
+  font-weight:700;
+}
+
+.calendar-item span{
+  overflow:hidden;
+  color:#7b90a2;
+  font-size:5px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+/* Detail-Zoom: Informationen bewusst größer lesbar */
+#autoZoomMount .car-detail-grid{
+  gap:10px;
+  margin-top:12px;
+}
+
+#autoZoomMount .car-detail{
+  min-height:118px;
+  padding:13px;
+  border-radius:12px;
+}
+
+#autoZoomMount .nav-map{
+  min-height:72px;
+}
+
+#autoZoomMount .nav-info strong,
+#autoZoomMount .car-music-detail strong,
+#autoZoomMount .car-phone-detail strong{
+  font-size:11px;
+}
+
+#autoZoomMount .nav-info span,
+#autoZoomMount .music-artist,
+#autoZoomMount .music-controls,
+#autoZoomMount .car-phone-detail span,
+#autoZoomMount .calendar-item time,
+#autoZoomMount .calendar-item span{
+  font-size:8px;
+}
+
+#autoZoomMount .music-kicker,
+#autoZoomMount .calendar-head span{
+  font-size:8px;
+}
+
+#autoZoomMount .calendar-head strong{
+  font-size:10px;
+}
+
+#autoZoomMount .music-controls button{
+  width:28px;
+  height:28px;
+  font-size:11px;
+}
+
+@media(max-width:620px){
+  .car-detail-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 5
+   WatchFace Studio auf V8-Masteruhr
+   ========================================================= */
+
+.editor-stage{
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:520px;
+  overflow:hidden;
+}
+
+.editor-watch-v8{
+  position:relative;
+  width:min(430px,42vw);
+  aspect-ratio:1;
+  border-radius:50%;
+  overflow:visible;
+  filter:drop-shadow(0 26px 38px rgba(0,0,0,.42));
+}
+
+.studio-watchframe-iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:50%;
+  background:#02070b;
+  overflow:hidden;
+}
+
+.studio-watch-overlay{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .22s ease, box-shadow .22s ease, background .22s ease;
+  z-index:5;
+}
+
+/* The left layer buttons remain functional:
+   the selected category visually highlights the V8 preview. */
+.editor-watch-v8[data-active="all"] .studio-watch-overlay{
+  opacity:0;
+}
+
+.editor-watch-v8[data-active="time"] .studio-watch-overlay{
+  opacity:1;
+  background:
+    radial-gradient(circle at 50% 39%,
+      rgba(57,215,255,.10) 0 18%,
+      transparent 19% 100%);
+  box-shadow:inset 0 0 38px rgba(0,159,255,.08);
+}
+
+.editor-watch-v8[data-active="date"] .studio-watch-overlay{
+  opacity:1;
+  background:
+    radial-gradient(ellipse at 50% 59%,
+      rgba(57,215,255,.12) 0 15%,
+      transparent 16% 100%);
+}
+
+.editor-watch-v8[data-active="weather"] .studio-watch-overlay{
+  opacity:1;
+  background:
+    radial-gradient(circle at 28% 27%,
+      rgba(57,215,255,.14) 0 12%,
+      transparent 13% 100%);
+}
+
+.editor-watch-v8[data-active="metrics"] .studio-watch-overlay{
+  opacity:1;
+  background:
+    radial-gradient(ellipse at 50% 69%,
+      rgba(57,215,255,.12) 0 26%,
+      transparent 27% 100%);
+}
+
+.editor-watch-v8[data-active="battery"] .studio-watch-overlay{
+  opacity:1;
+  background:
+    radial-gradient(circle at 72% 27%,
+      rgba(57,215,255,.14) 0 12%,
+      transparent 13% 100%);
+}
+
+.editor-watch-v8[data-active]:not([data-active="all"]) .studio-watchframe-iframe{
+  filter:brightness(.82);
+  transition:filter .22s ease;
+}
+
+.layer[data-layer="metrics"] .preview-steps{
+  font-size:10px;
+}
+
+@media(max-width:980px){
+  .editor-stage{min-height:470px}
+  .editor-watch-v8{width:min(410px,52vw)}
+}
+
+@media(max-width:720px){
+  .studio-body{
+    grid-template-columns:1fr;
+  }
+
+  .layers{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .editor-stage{min-height:430px}
+  .editor-watch-v8{width:min(390px,82vw)}
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 6
+   Interaktive Roadmap
+   ========================================================= */
+
+.timeline-action{
+  position:relative;
+  width:100%;
+  font:inherit;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease;
+}
+
+.timeline-action:hover,
+.timeline-action:focus-visible{
+  transform:translateY(-3px);
+  border-color:rgba(64,215,255,.48);
+  background:
+    linear-gradient(90deg,rgba(9,34,49,.84),rgba(5,17,26,.72));
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.22),
+    inset 0 0 0 1px rgba(53,211,255,.05),
+    0 0 24px rgba(0,153,255,.07);
+  outline:none;
+}
+
+.timeline-action:hover h3,
+.timeline-action:focus-visible h3{
+  color:#f3fbff;
+}
+
+.timeline-open{
+  position:absolute;
+  right:22px;
+  bottom:16px;
+  color:#3ed8ff;
+  font-size:16px;
+  font-style:normal;
+  opacity:.42;
+  transform:translate(-4px,4px);
+  transition:opacity .22s ease,transform .22s ease;
+}
+
+.timeline-action:hover .timeline-open,
+.timeline-action:focus-visible .timeline-open{
+  opacity:1;
+  transform:translate(0,0);
+}
+
+.roadmap-modal{
+  position:absolute;
+  inset:18px;
+  z-index:80;
+  display:grid;
+  place-items:center;
+  padding:28px;
+  border:1px solid rgba(68,215,255,.42);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 72% 30%,rgba(0,151,255,.14),transparent 34%),
+    linear-gradient(145deg,rgba(4,16,25,.995),rgba(1,6,11,.998));
+  box-shadow:0 32px 90px rgba(0,0,0,.65),0 0 35px rgba(0,157,255,.08);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(16px) scale(.985);
+  transition:opacity .28s ease,visibility .28s ease,transform .28s cubic-bezier(.2,.8,.2,1);
+}
+
+.roadmap-modal.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0) scale(1);
+}
+
+.roadmap-modal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  z-index:2;
+  width:40px;
+  height:40px;
+  border:1px solid rgba(98,143,173,.36);
+  border-radius:50%;
+  background:rgba(3,12,19,.82);
+  color:#edfaff;
+  font-size:27px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.roadmap-modal-close:hover{
+  color:#45d9ff;
+  border-color:rgba(69,217,255,.8);
+  box-shadow:0 0 20px rgba(0,160,255,.14);
+}
+
+.roadmap-modal-inner{
+  width:min(980px,92%);
+}
+
+.roadmap-demo-label{
+  display:inline-block;
+  margin-bottom:13px;
+  color:#42d8ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.roadmap-demo-title{
+  margin:0;
+  font-size:clamp(32px,4vw,58px);
+  line-height:1.02;
+}
+
+.roadmap-demo-lead{
+  max-width:720px;
+  margin:16px 0 0;
+  color:#8da1b2;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.roadmap-status-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:28px;
+}
+
+.roadmap-status-card{
+  min-height:126px;
+  padding:18px;
+  border:1px solid rgba(77,130,163,.22);
+  border-radius:14px;
+  background:rgba(6,19,29,.68);
+}
+
+.roadmap-status-card small{
+  display:block;
+  color:#45d9ff;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.roadmap-status-card strong{
+  display:block;
+  margin-top:9px;
+  color:#eef9ff;
+  font-size:17px;
+}
+
+.roadmap-status-card span{
+  display:block;
+  margin-top:7px;
+  color:#71899c;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.roadmap-progress{
+  margin-top:24px;
+  padding:16px 18px;
+  border:1px solid rgba(72,127,160,.2);
+  border-radius:13px;
+  background:rgba(4,14,22,.65);
+}
+
+.roadmap-progress-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  color:#8299aa;
+  font-size:11px;
+}
+
+.roadmap-progress-head strong{
+  color:#45d9ff;
+}
+
+.roadmap-progress-track{
+  height:5px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(83,112,131,.18);
+}
+
+.roadmap-progress-track i{
+  display:block;
+  width:83%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#3fd7ff,#0b8cff);
+  box-shadow:0 0 10px rgba(0,157,255,.35);
+}
+
+.ai-vision-shell{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:26px;
+  align-items:center;
+}
+
+.ai-vision-brain{
+  display:grid;
+  place-items:center;
+  min-height:320px;
+  border:1px solid rgba(72,128,160,.18);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(0,158,255,.14),transparent 34%),
+    rgba(4,13,20,.55);
+}
+
+.ai-vision-brain img{
+  width:min(210px,58%);
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:50%;
+  filter:drop-shadow(0 0 20px rgba(0,168,255,.22));
+}
+
+.ai-console{
+  padding:20px;
+  border:1px solid rgba(74,130,164,.22);
+  border-radius:18px;
+  background:rgba(5,17,26,.72);
+}
+
+.ai-console-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.ai-console-brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.ai-console-brand img{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.ai-console-brand strong{
+  font-size:13px;
+  letter-spacing:.08em;
+}
+
+.ai-console-ready{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#6f8798;
+  font-size:8px;
+  letter-spacing:.1em;
+}
+
+.ai-console-ready i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#40d9ff;
+  box-shadow:0 0 8px #20baff;
+}
+
+.ai-console h4{
+  margin:0;
+  font-size:28px;
+}
+
+.ai-console p{
+  margin:8px 0 18px;
+  color:#748b9e;
+  font-size:12px;
+}
+
+.ai-function-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.ai-function{
+  padding:12px;
+  border:1px solid rgba(73,130,164,.2);
+  border-radius:10px;
+  background:rgba(7,21,31,.72);
+}
+
+.ai-function b{
+  display:block;
+  color:#e7f7ff;
+  font-size:11px;
+}
+
+.ai-function span{
+  display:block;
+  margin-top:4px;
+  color:#668094;
+  font-size:8px;
+}
+
+.ai-input-demo{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:12px;
+  padding:11px 12px;
+  border:1px solid rgba(76,132,166,.25);
+  border-radius:10px;
+  color:#627b8f;
+  font-size:9px;
+  background:rgba(3,12,19,.88);
+}
+
+.ai-input-demo b{
+  display:grid;
+  place-items:center;
+  width:26px;
+  height:26px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#43d7ff,#0b8cff);
+  color:#00111d;
+  font-size:12px;
+}
+
+@media(max-width:760px){
+  .roadmap-modal{
+    position:fixed;
+    inset:12px;
+    overflow:auto;
+    padding:58px 18px 26px;
+  }
+
+  .roadmap-status-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ai-vision-shell{
+    grid-template-columns:1fr;
+  }
+
+  .ai-vision-brain{
+    min-height:220px;
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 6 KORREKTUR
+   Nur Layout/Viewport/Schließen-Button korrigiert
+   ========================================================= */
+
+#roadmap{
+  position:relative;
+}
+
+.roadmap-modal{
+  position:fixed !important;
+  inset:clamp(10px,2vh,24px) clamp(10px,2vw,28px) !important;
+  width:auto !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:calc(100vh - clamp(20px,4vh,48px)) !important;
+  margin:0 !important;
+  padding:clamp(54px,6vh,74px) clamp(18px,3vw,38px) clamp(20px,3vh,34px) !important;
+  overflow:auto !important;
+  overscroll-behavior:contain;
+  align-items:start !important;
+  justify-items:center !important;
+  box-sizing:border-box !important;
+  z-index:12050 !important;
+}
+
+.roadmap-modal.show{
+  display:grid !important;
+}
+
+.roadmap-modal-inner{
+  width:min(1180px,96%) !important;
+  max-width:1180px !important;
+  margin:auto !important;
+  box-sizing:border-box !important;
+}
+
+.roadmap-modal-close{
+  position:fixed !important;
+  top:clamp(18px,3vh,30px) !important;
+  right:clamp(18px,2.5vw,34px) !important;
+  z-index:12060 !important;
+  width:44px !important;
+  height:44px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  line-height:1 !important;
+  flex:0 0 auto !important;
+  box-sizing:border-box !important;
+}
+
+/* Homepage/Markenauftritt-Demo kompakter, damit sie auf 16:9 vollständig passt */
+.roadmap-status-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:12px !important;
+  margin-top:24px !important;
+}
+
+.roadmap-status-card{
+  min-height:112px !important;
+  padding:16px !important;
+}
+
+.roadmap-progress{
+  margin-top:18px !important;
+  padding:14px 16px !important;
+}
+
+/* Persönliche-KI-Demo ebenfalls sauber im Viewport */
+.ai-vision-shell{
+  width:100% !important;
+  max-width:1080px !important;
+  min-height:0 !important;
+  align-items:center !important;
+}
+
+.ai-vision-brain{
+  min-height:280px !important;
+}
+
+.ai-console{
+  max-height:none !important;
+}
+
+/* Kleinere Notebook-/Browserhöhen */
+@media (max-height: 820px){
+  .roadmap-modal{
+    padding-top:58px !important;
+    padding-bottom:18px !important;
+  }
+
+  .roadmap-demo-title{
+    font-size:clamp(30px,3.5vw,48px) !important;
+  }
+
+  .roadmap-demo-lead{
+    margin-top:10px !important;
+    line-height:1.55 !important;
+  }
+
+  .roadmap-status-grid{
+    margin-top:18px !important;
+  }
+
+  .roadmap-status-card{
+    min-height:96px !important;
+    padding:13px !important;
+  }
+
+  .roadmap-status-card strong{
+    margin-top:6px !important;
+    font-size:15px !important;
+  }
+
+  .roadmap-status-card span{
+    margin-top:5px !important;
+    line-height:1.35 !important;
+  }
+
+  .roadmap-progress{
+    margin-top:14px !important;
+    padding:11px 14px !important;
+  }
+
+  .ai-vision-brain{
+    min-height:230px !important;
+  }
+
+  .ai-vision-brain img{
+    width:min(180px,50%) !important;
+  }
+
+  .ai-console{
+    padding:16px !important;
+  }
+
+  .ai-console h4{
+    font-size:24px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width:760px){
+  .roadmap-modal{
+    inset:8px !important;
+    max-height:calc(100vh - 16px) !important;
+    padding:56px 14px 18px !important;
+  }
+
+  .roadmap-modal-inner{
+    width:100% !important;
+  }
+
+  .roadmap-modal-close{
+    top:16px !important;
+    right:16px !important;
+  }
+
+  .roadmap-status-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .ai-vision-shell{
+    grid-template-columns:1fr !important;
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – PUNKT 8
+   VISUAL POLISH & CONSISTENCY PASS
+   Keine Funktionsänderungen, keine neuen Bilder
+   ========================================================= */
+
+:root{
+  --tilsmee-cyan:#43d7ff;
+  --tilsmee-blue:#0b8cff;
+  --tilsmee-bg:#02070d;
+  --tilsmee-panel:#06111a;
+  --tilsmee-panel-2:#081722;
+  --tilsmee-text:#f3f8fc;
+  --tilsmee-muted:#8194a7;
+  --tilsmee-border:rgba(86,145,181,.24);
+  --tilsmee-border-hot:rgba(67,215,255,.52);
+  --tilsmee-glow:0 0 26px rgba(0,153,255,.10);
+  --tilsmee-shadow:0 24px 56px rgba(0,0,0,.30);
+}
+
+/* Gesamtrhythmus */
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(0,123,255,.07),transparent 30%),
+    var(--tilsmee-bg);
+}
+
+.panel,
+.section{
+  position:relative;
+}
+
+.panel::before,
+.section::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:min(1180px,86vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(67,215,255,.08),transparent);
+  pointer-events:none;
+}
+
+/* Typografie-Hierarchie vereinheitlichen */
+.eyebrow,
+.roadmap-demo-label,
+.device-concept-label{
+  letter-spacing:.16em !important;
+  font-weight:800 !important;
+}
+
+h1,h2,h3,h4,h5{
+  text-wrap:balance;
+}
+
+.hero h1,
+.section-head h2,
+.studio-copy h2,
+.contact-box h2{
+  letter-spacing:-.035em;
+}
+
+.lead,
+.section-head p,
+.studio-copy p,
+.contact-box p{
+  line-height:1.68;
+}
+
+/* Karten / Panels konsistent veredeln */
+.feature-card,
+.vision-card-v110,
+.timeline-row,
+.studio-window,
+.contact-box,
+.roadmap-modal,
+.device-concept-panel,
+.watch-concept-panel,
+.pc-concept-panel,
+.auto-concept-panel{
+  border-color:var(--tilsmee-border) !important;
+  box-shadow:
+    var(--tilsmee-shadow),
+    inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+
+/* Gemeinsame Interaktionssprache */
+.button,
+.layer,
+.feature-card,
+.vision-card-v110,
+.timeline-action,
+.header nav a,
+.header-contact,
+footer a{
+  transition:
+    transform .22s cubic-bezier(.2,.8,.2,1),
+    color .22s ease,
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease,
+    opacity .22s ease !important;
+}
+
+.button:hover,
+.layer:hover,
+.feature-card:hover,
+.vision-card-v110:hover,
+.timeline-action:hover{
+  transform:translateY(-3px) !important;
+}
+
+.header nav a{
+  position:relative;
+}
+
+.header nav a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-8px;
+  width:0;
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--tilsmee-cyan),transparent);
+  box-shadow:0 0 8px rgba(67,215,255,.35);
+  transition:width .22s ease;
+}
+
+.header nav a:hover{
+  color:#eafaff !important;
+}
+
+.header nav a:hover::after{
+  width:78%;
+}
+
+.header-contact:hover,
+.button-primary:hover{
+  box-shadow:
+    0 0 26px rgba(0,174,255,.22),
+    0 10px 28px rgba(0,0,0,.20) !important;
+}
+
+/* HERO – visuelle Gewichtung auf Marke / Vision */
+.hero-copy{
+  max-width:720px;
+}
+
+.hero .lead{
+  max-width:650px;
+  color:#8ea1b3;
+}
+
+.hero .actions{
+  gap:12px;
+}
+
+.hero .status-line{
+  opacity:.72;
+  font-size:12px;
+  letter-spacing:.03em;
+}
+
+.watch-area{
+  filter:drop-shadow(0 28px 44px rgba(0,0,0,.28));
+}
+
+.watch-hint{
+  margin-top:10px !important;
+  color:#61778b !important;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:11px !important;
+}
+
+/* VISION – etwas mehr Raum und elegantere Karten */
+.vision-section .section-head,
+.vision-section .section-head + *{
+  position:relative;
+  z-index:1;
+}
+
+.vision-card-v110{
+  background:
+    radial-gradient(circle at 18% 10%,rgba(52,203,255,.06),transparent 34%),
+    linear-gradient(145deg,rgba(11,24,35,.88),rgba(4,11,18,.94)) !important;
+}
+
+.vision-card-v110:hover{
+  border-color:var(--tilsmee-border-hot) !important;
+  box-shadow:
+    0 22px 48px rgba(0,0,0,.28),
+    0 0 24px rgba(0,157,255,.09) !important;
+}
+
+/* WATCHFACE STUDIO – räumlich klarer */
+.studio-window{
+  background:
+    radial-gradient(circle at 65% 42%,rgba(0,145,255,.07),transparent 34%),
+    linear-gradient(145deg,rgba(7,18,28,.96),rgba(3,9,15,.985)) !important;
+}
+
+.window-bar{
+  border-bottom:1px solid rgba(80,133,166,.17);
+}
+
+.layers{
+  background:
+    linear-gradient(180deg,rgba(4,14,22,.92),rgba(3,10,16,.88));
+}
+
+.layer{
+  border-color:rgba(78,131,163,.18) !important;
+}
+
+.layer.active{
+  border-color:rgba(67,215,255,.44) !important;
+  background:rgba(9,33,48,.72) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(67,215,255,.04),
+    0 0 18px rgba(0,157,255,.06);
+}
+
+.editor-stage{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(0,143,255,.08),transparent 40%);
+}
+
+.stage-label{
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:#6e8497;
+}
+
+/* ROADMAP – Grundansicht etwas stärker */
+.timeline{
+  gap:14px;
+}
+
+.timeline-row{
+  background:
+    linear-gradient(90deg,rgba(7,22,32,.84),rgba(4,13,20,.74)) !important;
+}
+
+.timeline-row:hover{
+  border-color:rgba(67,215,255,.42) !important;
+}
+
+/* Abschlussbereich: stärkerer visueller Abschluss */
+.contact{
+  background:
+    radial-gradient(circle at 50% 34%,rgba(0,147,255,.08),transparent 32%);
+}
+
+.contact-box{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(0,157,255,.10),transparent 34%),
+    linear-gradient(145deg,rgba(8,21,31,.92),rgba(3,10,16,.96)) !important;
+}
+
+.contact-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:
+    linear-gradient(120deg,transparent 0 42%,rgba(70,218,255,.035) 50%,transparent 58%);
+  pointer-events:none;
+}
+
+.contact-symbol{
+  filter:drop-shadow(0 0 18px rgba(0,162,255,.16));
+}
+
+.contact-box h2{
+  font-size:clamp(36px,4vw,58px);
+}
+
+.contact-box p{
+  color:#8da0b1;
+}
+
+/* Footer hochwertiger */
+footer{
+  padding-top:22px !important;
+  border-top:1px solid rgba(74,127,159,.14);
+}
+
+footer strong{
+  color:#d8e5ed;
+}
+
+footer small,
+footer a{
+  color:#657b8f;
+}
+
+footer a:hover{
+  color:#42d8ff !important;
+  text-shadow:0 0 10px rgba(0,157,255,.24);
+}
+
+/* Übergänge zwischen Abschnitten */
+.reveal{
+  transform:translateY(18px);
+  opacity:0;
+}
+
+.reveal.visible{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* Kleine Browserhöhen: etwas kompakterer Gesamtrhythmus */
+@media(max-height:850px){
+  .panel{
+    padding-top:clamp(74px,10vh,110px);
+    padding-bottom:clamp(52px,8vh,84px);
+  }
+
+  .hero-copy{
+    transform:translateY(-8px);
+  }
+}
+
+/* Mobile: Polish ohne Funktionsänderung */
+@media(max-width:760px){
+  .hero h1,
+  .section-head h2,
+  .studio-copy h2,
+  .contact-box h2{
+    letter-spacing:-.025em;
+  }
+
+  .panel::before,
+  .section::before{
+    width:90vw;
+  }
+
+  footer{
+    gap:18px;
+  }
+}
+
+
+/* =========================================================
+   TILSMEE HOMEPAGE 1.1.0 – STARTSEITE HERO REWORK
+   Nur Startseite / keine neuen Bilder / keine Funktionsänderung
+   ========================================================= */
+
+.loader{
+  display:grid !important;
+  place-items:center !important;
+  align-content:center !important;
+  min-height:100vh !important;
+  padding:clamp(28px,4vh,48px) 24px !important;
+  overflow:hidden !important;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(0,143,255,.09),transparent 26%),
+    radial-gradient(circle at 50% 56%,rgba(0,95,170,.05),transparent 36%),
+    #02070d !important;
+}
+
+.loader::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,transparent 0 72%,rgba(0,148,255,.025) 86%,transparent 100%);
+}
+
+.loader-mark{
+  position:relative;
+  margin:0 0 22px !important;
+  transform:translateY(-42px);
+}
+
+.loader-mark::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:220px;
+  height:220px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,159,255,.16),rgba(0,94,177,.06) 34%,transparent 68%);
+  filter:blur(14px);
+  z-index:0;
+  pointer-events:none;
+}
+
+.loader-mark img{
+  position:relative;
+  z-index:1;
+  width:clamp(132px,10vw,170px) !important;
+  height:clamp(132px,10vw,170px) !important;
+  object-fit:contain !important;
+  filter:
+    drop-shadow(0 0 10px rgba(0,176,255,.28))
+    drop-shadow(0 0 26px rgba(0,124,255,.14)) !important;
+}
+
+.loader-mark .core-dot{
+  z-index:2;
+}
+
+.loader-name{
+  position:relative;
+  display:flex !important;
+  align-items:flex-end !important;
+  justify-content:center !important;
+  gap:9px !important;
+  margin-top:-20px !important;
+  transform:translateY(-18px);
+}
+
+.loader-name::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-18px;
+  width:min(520px,62vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(67,215,255,.30),transparent);
+  box-shadow:0 0 14px rgba(0,157,255,.18);
+}
+
+.loader-name img{
+  width:clamp(410px,34vw,560px) !important;
+  height:auto !important;
+  object-fit:contain !important;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.30)) !important;
+}
+
+.loader-name .ai{
+  font-size:clamp(28px,2.2vw,38px) !important;
+  line-height:1 !important;
+  margin-bottom:7px !important;
+  color:#fff !important;
+}
+
+.loader-subtitle{
+  margin-top:22px !important;
+  font-size:clamp(22px,1.65vw,30px) !important;
+  font-weight:500 !important;
+  letter-spacing:.01em !important;
+  color:#f1f6fb !important;
+  transform:translateY(-8px);
+}
+
+.loader-meta{
+  margin-top:11px !important;
+  color:#6f8498 !important;
+  font-size:clamp(12px,.9vw,15px) !important;
+  letter-spacing:.05em !important;
+  transform:translateY(-6px);
+}
+
+.loader-start{
+  margin-top:26px !important;
+  min-width:min(390px,72vw) !important;
+  height:64px !important;
+  padding:0 34px !important;
+  border-radius:18px !important;
+  border:1px solid rgba(120,227,255,.46) !important;
+  background:
+    linear-gradient(135deg,#47d7ff 0%,#159cff 100%) !important;
+  color:#001522 !important;
+  font-size:clamp(17px,1.2vw,20px) !important;
+  font-weight:900 !important;
+  letter-spacing:.035em !important;
+  box-shadow:
+    0 16px 34px rgba(0,116,201,.24),
+    0 0 28px rgba(0,166,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.34) !important;
+  transform:translateY(0);
+}
+
+.loader-start:hover,
+.loader-start:focus-visible{
+  transform:translateY(-3px) scale(1.01) !important;
+  box-shadow:
+    0 20px 40px rgba(0,116,201,.30),
+    0 0 36px rgba(0,179,255,.22),
+    inset 0 1px 0 rgba(255,255,255,.40) !important;
+}
+
+.loader-hint{
+  position:relative !important;
+  margin-top:26px !important;
+  bottom:auto !important;
+  color:#6b8298 !important;
+  font-size:clamp(12px,.9vw,14px) !important;
+  letter-spacing:.11em !important;
+  text-transform:uppercase !important;
+}
+
+.loader-hint::after{
+  content:"";
+  display:block;
+  width:1px;
+  height:36px;
+  margin:14px auto 0;
+  background:linear-gradient(180deg,rgba(67,215,255,.56),transparent);
+  box-shadow:0 0 10px rgba(67,215,255,.22);
+}
+
+@media(max-height:850px){
+  .loader{
+    padding-top:18px !important;
+    padding-bottom:18px !important;
+  }
+
+  .loader-mark{
+    transform:translateY(-18px);
+    margin-bottom:12px !important;
+  }
+
+  .loader-mark img{
+    width:120px !important;
+    height:120px !important;
+  }
+
+  .loader-name{
+    transform:translateY(-8px);
+    margin-top:-8px !important;
+  }
+
+  .loader-name img{
+    width:min(460px,38vw) !important;
+  }
+
+  .loader-subtitle{
+    margin-top:16px !important;
+    font-size:22px !important;
+  }
+
+  .loader-meta{
+    margin-top:7px !important;
+  }
+
+  .loader-start{
+    margin-top:20px !important;
+    height:58px !important;
+  }
+
+  .loader-hint{
+    margin-top:18px !important;
+  }
+}
+
+@media(max-width:760px){
+  .loader{
+    padding-inline:18px !important;
+  }
+
+  .loader-mark{
+    transform:translateY(-16px);
+  }
+
+  .loader-mark img{
+    width:118px !important;
+    height:118px !important;
+  }
+
+  .loader-name{
+    gap:6px !important;
+    transform:translateY(-6px);
+  }
+
+  .loader-name img{
+    width:min(360px,78vw) !important;
+  }
+
+  .loader-name .ai{
+    font-size:25px !important;
+    margin-bottom:5px !important;
+  }
+
+  .loader-subtitle{
+    font-size:20px !important;
+    text-align:center;
+  }
+
+  .loader-meta{
+    font-size:12px !important;
+    text-align:center;
+  }
+
+  .loader-start{
+    min-width:min(330px,86vw) !important;
+    height:58px !important;
+  }
+}
+
+/* SEMIFINALE V2 — Vision / Geräte / Musik: echter MP3-Player */
+#visionMusicPlayer{display:none}
+.music-play-toggle{cursor:pointer;pointer-events:auto!important}
+.music-play-toggle:focus-visible{outline:2px solid #47d9ff;outline-offset:3px}
+.music-progress{cursor:pointer;pointer-events:auto}
+.music-progress i{width:0%}
