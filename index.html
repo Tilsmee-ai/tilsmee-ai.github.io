@@ -2,566 +2,89 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#03070c">
-  <meta name="description" content="TILSMEE ai – dein persönlicher KI-Assistent auf jedem Gerät.">
-  <title>TILSMEE ai | Dein persönlicher KI-Assistent</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="brain-master.png">
-  <link rel="shortcut icon" href="brain-master.png">
-  <link rel="icon" href="brain-master.png">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TILSMEE V8 Watchface · Master 1.1.0</title>
+  <link rel="stylesheet" href="watchface.css">
 </head>
 <body>
-  <div class="loader" id="loader">
-    <div class="loader-mark">
-      <img src="brain-master.png" alt="TILSMEE Gehirn">
-      <span class="core-dot"></span>
+<main class="stage">
+  <section class="watch" id="watch">
+    <div class="second-ring" id="secondRing" aria-hidden="true"></div>
+
+    <div class="brain-module">
+      <button class="brain-shell" id="brainButton" type="button" aria-label="TILSMEE aktivieren">
+        <img class="brain-master" src="tilsmee-brain-master.png" alt="TILSMEE Gehirn">
+        <span class="brain-core-pulse" aria-hidden="true"></span>
+      </button>
     </div>
 
-    <div class="loader-name">
-      <img src="tilsmee-wordmark.png" alt="TILSMEE">
-      <span class="ai">ai</span>
+    
+    <div class="brain-message" id="brainMessage" aria-live="polite">
+      Wie kann ich dir helfen?
     </div>
 
-    <p class="loader-subtitle">Dein persönlicher KI-Assistent</p>
-    <p class="loader-version">Version 1.1.0 · Entwickler: Markus Smeets</p>
-
-    <button class="loader-button" id="startButton" type="button">
-      TILSMEE STARTEN
-    </button>
-
-    <p class="loader-hint">Scrollen oder wischen</p>
-  </div>
-
-  <header class="header">
-    <a class="brand" href="#start" aria-label="TILSMEE Startseite">
-      <span class="brand-symbol">
-        <img src="brain-master.png" alt="">
-        <span class="core-dot core-dot-small"></span>
-      </span>
-      <span class="brand-lockup">
-        <img src="tilsmee-wordmark.png" alt="TILSMEE">
-        <span class="ai">ai</span>
-      </span>
-    </a>
-
-    <nav aria-label="Hauptnavigation">
-      <a href="#start">Start</a>
-      <a href="#vision">TILSMEE</a>
-      <a href="#studio">WatchFace Studio</a>
-      <a href="#roadmap">Roadmap</a>
-    </nav>
-
-    <a class="header-contact" href="#kontakt">Kontakt</a>
-  </header>
-
-  <main>
-    <section class="panel hero" id="start">
-      <div class="grid-glow grid-glow-left"></div>
-      <div class="grid-glow grid-glow-right"></div>
-
-      <div class="hero-copy reveal">
-        <p class="eyebrow">PERSÖNLICHE KI · SOFTWARE · SMARTWATCH</p>
-
-        <div class="hero-lockup">
-          <img src="tilsmee-wordmark.png" alt="TILSMEE">
-          <span class="ai">ai</span>
-        </div>
-
-        <h1>Dein persönlicher KI-Assistent.<br>Auf jedem Gerät.</h1>
-
-        <p class="lead">
-          TILSMEE verbindet Projekte, Wissen und Geräte zu einem persönlichen System,
-          das dich im Alltag zuverlässig begleitet.
-        </p>
-
-        <div class="actions">
-          <a class="button button-primary" href="#studio">WatchFace Studio ansehen</a>
-          <button class="button button-secondary" id="weatherButton" type="button">Wetter aktualisieren</button>
-        </div>
-
-        <p class="status-line" id="weatherStatus">Wetter wird geladen …</p>
-      </div>
-
-      <!-- MASTER 1.1.0 FINAL-CLEAN: V8 Watchface modular eingebunden -->
-      <div class="watch-area reveal">
-        <div class="smartwatch-hardware" aria-label="TILSMEE Smartwatch">
-          <span class="watch-lug watch-lug-top-left" aria-hidden="true"></span>
-          <span class="watch-lug watch-lug-top-right" aria-hidden="true"></span>
-          <span class="watch-lug watch-lug-bottom-left" aria-hidden="true"></span>
-          <span class="watch-lug watch-lug-bottom-right" aria-hidden="true"></span>
-
-          <span class="watch-side-button" aria-hidden="true">
-            <span class="watch-side-button-detail"></span>
-          </span>
-
-          <div class="watch-case">
-            <span class="watch-case-highlight" aria-hidden="true"></span>
-            <div class="watchframe-module">
-          <iframe
-            id="tilsmeeWatchframe"
-            class="watchframe-iframe"
-            src="watchface/index.html"
-            title="TILSMEE V8 Watchface"
-            loading="eager"
-            scrolling="no">
-          </iframe>
-        </div>
-          </div>
-        </div>
-
-        <div class="watch-assistant" id="watchAssistant" aria-live="polite">
-          <span class="watch-assistant-dot"></span>
-          <span>Wie kann ich dir helfen?</span>
-        </div>
-        <p class="watch-hint">Klicke auf das Gehirn</p>
-      </div>
-
-      <a class="scroll-next" href="#vision">WEITER<span></span></a>
-    </section>
-
-    <section class="panel vision vision-v110" id="vision">
-      <div class="section-head reveal">
-        <p class="eyebrow">DIE VISION</p>
-        <h2>Ein persönliches System statt vieler einzelner Werkzeuge.</h2>
-        <p>TILSMEE soll deine Arbeitsweise verstehen, Zusammenhänge erhalten und dir genau dort helfen, wo du gerade bist.</p>
-      </div>
-
-      <div class="vision-deck" id="visionDeck">
-        <button class="vision-card-v110 reveal" data-vision="0" type="button"><span>01</span><h3>Persönlich</h3><p>Projekte, Vorlieben und Arbeitsstände bleiben sinnvoll verbunden.</p><b>VISION ENTDECKEN ↗</b></button>
-        <button class="vision-card-v110 reveal" data-vision="1" type="button"><span>02</span><h3>Privat</h3><p>Klare Kontrolle, nachvollziehbare Funktionen und bewusster Umgang mit deinen Daten.</p><b>VISION ENTDECKEN ↗</b></button>
-        <button class="vision-card-v110 reveal" data-vision="2" type="button"><span>03</span><h3>Alltag</h3><p>TILSMEE begleitet Arbeit, Ideen, Projekte und tägliche Aufgaben.</p><b>VISION ENTDECKEN ↗</b></button>
-        <button class="vision-card-v110 reveal" data-vision="3" type="button"><span>04</span><h3>Geräte</h3><p>Eine persönliche KI, die nicht an ein einziges Gerät gebunden ist.</p><b>VISION ENTDECKEN ↗</b></button>
-      </div>
-
-      <div class="vision-focus" id="visionFocus" aria-hidden="true">
-        <button class="vision-x" id="visionX" type="button" aria-label="Schließen">×</button>
-        <button class="vision-arrow" id="visionPrev" type="button" aria-label="Zurück">‹</button>
-        <div class="vision-focus-content">
-          <small id="visionCount">01 / 04</small><em id="visionKicker">PERSÖNLICH</em>
-          <h3 id="visionTitle"></h3><p id="visionText"></p><div class="vision-demo-v110" id="visionDemo"></div>
-        </div>
-        <button class="vision-arrow" id="visionNext" type="button" aria-label="Weiter">›</button>
-        <div class="device-concept-panel" id="deviceConceptPanel" aria-hidden="true">
-          <button class="device-concept-close" id="deviceConceptClose" type="button" aria-label="Smartphone-Demo schließen">×</button>
-
-          <div class="device-concept-copy">
-            <span class="device-concept-label">ZUKUNFTSVISION · KONZEPT</span>
-            <h4>TILSMEE auf deinem Smartphone.</h4>
-            <p>Dein persönlicher Begleiter für unterwegs. Projekte, Wissen und Geräte bleiben mit dir verbunden.</p>
-          </div>
-
-          <div class="phone-concept" aria-label="TILSMEE Smartphone Zukunftskonzept">
-            <div class="phone-shell">
-              <div class="phone-speaker"></div>
-              <div class="phone-camera"></div>
-
-              <div class="phone-screen">
-                <div class="phone-status">
-                  <span>09:41</span>
-                  <span class="phone-status-right">● 5G ▰</span>
-                </div>
-
-                <div class="phone-tilsmee-head">
-                  <img src="brain-master.png" alt="TILSMEE">
-                  <div>
-                    <strong>TILSMEE</strong>
-                    <small>Persönlicher KI-Assistent</small>
-                  </div>
-                  <span class="phone-ready-dot" aria-hidden="true"></span>
-                </div>
-
-                <div class="phone-greeting">
-                  <span>Guten Abend.</span>
-                  <h5>Wie kann ich dir helfen?</h5>
-                </div>
-
-                <div class="phone-action-grid">
-                  <div class="phone-action">
-                    <span class="phone-action-icon">▦</span>
-                    <strong>Projekte</strong>
-                    <small>Weiterarbeiten</small>
-                  </div>
-                  <div class="phone-action">
-                    <span class="phone-action-icon">◎</span>
-                    <strong>Wissen</strong>
-                    <small>Alles verbunden</small>
-                  </div>
-                  <div class="phone-action">
-                    <span class="phone-action-icon">⌁</span>
-                    <strong>Geräte</strong>
-                    <small>Überall dabei</small>
-                  </div>
-                </div>
-
-                <div class="phone-context-card">
-                  <span class="phone-context-kicker">WEITERMACHEN</span>
-                  <strong>TILSMEE Homepage 1.1.0</strong>
-                  <small>Letzter Stand wurde gespeichert.</small>
-                </div>
-
-                <div class="phone-input">
-                  <span>Nachricht an TILSMEE …</span>
-                  <span class="phone-mic">◉</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="watch-concept-panel" id="watchConceptPanel" aria-hidden="true">
-          <button class="watch-concept-close" id="watchConceptClose" type="button" aria-label="Smartwatch-Demo schließen">×</button>
-          <div class="watch-concept-copy">
-            <span class="device-concept-label">ZUKUNFTSVISION · KONZEPT</span>
-            <h4>TILSMEE an deinem Handgelenk.</h4>
-            <p>Dein persönlicher Begleiter direkt an deiner Smartwatch. Zeit, Informationen und der direkte Zugang zu TILSMEE bleiben immer griffbereit.</p>
-          </div>
-          <div class="watch-concept-visual" id="watchConceptVisual" role="button" tabindex="0" aria-label="Smartwatch vergrößern">
-            <div class="smartwatch-hardware concept-watch" aria-label="TILSMEE Smartwatch Zukunftskonzept">
-              <span class="watch-lug watch-lug-top-left" aria-hidden="true"></span><span class="watch-lug watch-lug-top-right" aria-hidden="true"></span>
-              <span class="watch-lug watch-lug-bottom-left" aria-hidden="true"></span><span class="watch-lug watch-lug-bottom-right" aria-hidden="true"></span>
-              <span class="watch-side-button" aria-hidden="true"><span class="watch-side-button-detail"></span></span>
-              <div class="watch-case"><span class="watch-case-highlight" aria-hidden="true"></span>
-                <div class="watchframe-module"><iframe class="watchframe-iframe" src="watchface/index.html" title="TILSMEE Smartwatch Zukunftsvision" loading="eager" scrolling="no"></iframe></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pc-concept-panel" id="pcConceptPanel" aria-hidden="true">
-          <button class="pc-concept-close" id="pcConceptClose" type="button" aria-label="PC-Demo schließen">×</button>
-          <div class="pc-concept-copy">
-            <span class="device-concept-label">ZUKUNFTSVISION · KONZEPT</span>
-            <h4>Dein persönlicher Arbeitsraum.</h4>
-            <p>TILSMEE auf dem PC verbindet Projekte, Wissen, Aufgaben und deine Geräte in einer gemeinsamen persönlichen Arbeitsoberfläche.</p>
-          </div>
-          <div class="pc-concept-visual" id="pcConceptVisual" role="button" tabindex="0" aria-label="PC-Demo vergrößern">
-            <div class="pc-device">
-              <div class="pc-monitor">
-                <div class="pc-screen">
-                  <div class="pc-topbar">
-                    <div class="pc-brand"><img src="brain-master.png" alt=""><span>TILSMEE</span></div>
-                    <span class="pc-ready"><i></i> BEREIT</span>
-                  </div>
-                  <div class="pc-layout">
-                    <aside class="pc-sidebar">
-                      <b>ARBEITSRAUM</b>
-                      <span class="active">⌂ Übersicht</span>
-                      <span>▦ Projekte</span>
-                      <span>◎ Wissen</span>
-                      <span>✓ Aufgaben</span>
-                      <span>⌁ Geräte</span>
-                    </aside>
-                    <main class="pc-main">
-                      <small>GUTEN MORGEN</small>
-                      <h5>Wie kann ich dir helfen?</h5>
-                      <div class="pc-cards">
-                        <div><em>AKTUELLES PROJEKT</em><strong>TILSMEE Homepage</strong><span>Vision · Geräte · PC</span></div>
-                        <div><em>NÄCHSTER SCHRITT</em><strong>Weiterarbeiten</strong><span>Dein Stand ist bereit.</span></div>
-                      </div>
-                      <div class="pc-work">
-                        <div class="pc-work-head"><strong>Deine Bereiche</strong><span>Alles verbunden</span></div>
-                        <div class="pc-work-grid">
-                          <span><b>12</b> Projekte</span>
-                          <span><b>∞</b> Wissen</span>
-                          <span><b>04</b> Geräte</span>
-                        </div>
-                      </div>
-                      <div class="pc-input"><span>Nachricht an TILSMEE …</span><b>◉</b></div>
-                    </main>
-                  </div>
-                </div>
-              </div>
-              <div class="pc-neck"></div>
-              <div class="pc-base"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="auto-concept-panel" id="autoConceptPanel" aria-hidden="true">
-          <button class="auto-concept-close" id="autoConceptClose" type="button" aria-label="Auto-Infotainment-Demo schließen">×</button>
-
-          <div class="auto-concept-copy">
-            <span class="device-concept-label">ZUKUNFTSVISION · KONZEPT</span>
-            <h4>TILSMEE begleitet dich auch im Auto.</h4>
-            <p>Eine persönliche KI im Fahrzeug: Navigation, Musik, Telefon und Assistenz direkt im Infotainment-System.</p>
-          </div>
-
-          <div class="cockpit-concept" aria-label="TILSMEE Auto-Cockpit Zukunftskonzept">
-            <div class="dashboard-shell">
-              <div class="dashboard-top">
-                <div class="driver-cluster">
-                  <div class="cluster-arc"></div>
-                  <div class="cluster-speed">82</div>
-                  <div class="cluster-unit">km/h</div>
-                  <div class="cluster-small">D · 12°C</div>
-                </div>
-
-                <div class="infotainment-frame" id="infotainmentFrame" role="button" tabindex="0" aria-label="Auto-Infotainment vergrößern">
-                  <div class="infotainment-screen">
-                    <div class="car-topbar">
-                      <div class="car-brand">
-                        <img src="brain-master.png" alt="TILSMEE">
-                        <div>
-                          <strong>TILSMEE</strong>
-                          <small>Auto-Infotainment</small>
-                        </div>
-                      </div>
-                      <div class="car-clock">10:09</div>
-                    </div>
-
-                    <div class="car-main">
-                      <div class="car-assistant">
-                        <span class="car-kicker">GUTEN MORGEN</span>
-                        <h5>Wohin darf ich dich begleiten?</h5>
-                        <p>TILSMEE ist bereit.</p>
-                      </div>
-
-                      <div class="car-grid">
-                        <div class="car-card"><span class="car-icon">⌖</span><strong>Navigation</strong><small>Ziel wählen</small></div>
-                        <div class="car-card"><span class="car-icon">♫</span><strong>Musik</strong><small>Wiedergabe</small></div>
-                        <div class="car-card"><span class="car-icon">◔</span><strong>Telefon</strong><small>Verbunden</small></div>
-                        <div class="car-card"><span class="car-icon">◎</span><strong>TILSMEE</strong><small>Persönliche Assistenz</small></div>
-                      </div>
-
-                      <div class="car-detail-grid">
-                        <section class="car-detail car-nav-detail" aria-label="Navigation Vorschau">
-                          <div class="nav-map">
-                            <span class="nav-road nav-road-a"></span>
-                            <span class="nav-road nav-road-b"></span>
-                            <span class="nav-road nav-road-c"></span>
-                            <span class="nav-route nav-route-a"></span>
-                            <span class="nav-route nav-route-b"></span>
-                            <span class="nav-position">➤</span>
-                          </div>
-                          <div class="nav-info">
-                            <strong>Geldern Zentrum</strong>
-                            <span>12 Min · 6,8 km</span>
-                          </div>
-                        </section>
-
-                        <section class="car-detail car-music-detail" aria-label="Aktuell gespielte Musik">
-                          <span class="music-kicker">JETZT LÄUFT</span>
-                          <strong>Me, Myself and I</strong>
-                          <span class="music-artist">Blackmagic Smeety</span>
-                          <div class="music-progress" data-music-progress><i></i></div>
-                          <div class="music-controls">
-                            <span data-music-current>0:00</span>
-                            <button class="music-play-toggle" type="button" aria-label="Me, Myself and I abspielen">▶</button>
-                            <span data-music-duration>4:36</span>
-                          </div>
-                          <audio id="visionMusicPlayer" preload="metadata" src="music/me-myself-and-i.mp3"></audio>
-                        </section>
-
-                        <section class="car-detail car-phone-detail" aria-label="Telefon Status">
-                          <div class="phone-status-dot"></div>
-                          <strong>Telefon verbunden</strong>
-                          <span>Samsung S25</span>
-                        </section>
-
-                        <section class="car-detail car-calendar-detail" aria-label="Heutige Termine">
-                          <div class="calendar-head">
-                            <span>HEUTE</span>
-                            <strong>22 AUG</strong>
-                          </div>
-                          <div class="calendar-item"><time>10:30</time><span>Termin</span></div>
-                          <div class="calendar-item"><time>14:00</time><span>Projekt TILSMEE</span></div>
-                          <div class="calendar-item"><time>18:00</time><span>Erinnerung</span></div>
-                        </section>
-                      </div>
-
-                      <div class="car-bottomline">
-                        <span>Innenraum 21°C</span>
-                        <span class="car-ready"><i></i> TILSMEE BEREIT</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="passenger-trim"></div>
-              </div>
-
-              <div class="dashboard-lower">
-                <div class="steering-wheel"><div class="steering-center"></div></div>
-                <div class="console-strip"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <p class="vision-hint-v110">Karte anklicken · auf Mobilgeräten wischen</p>
-    </section>
-
-    <section class="panel studio" id="studio">
-      <div class="studio-window reveal">
-        <div class="window-bar">
-          <span></span><span></span><span></span>
-          <div class="window-title">
-            <img src="tilsmee-wordmark.png" alt="TILSMEE">
-            <b>WatchFace Studio</b>
-          </div>
-        </div>
-
-        <div class="studio-body">
-          <aside class="layers">
-            <h3>Ebenen</h3>
-            <button class="layer active" data-layer="all">
-              <span class="layer-preview preview-bg"></span>
-              <span><b>Gesamtansicht</b><small>Alle Elemente</small></span>
-            </button>
-            <button class="layer" data-layer="time">
-              <span class="layer-preview preview-time">10:09</span>
-              <span><b>Uhrzeit</b><small>Stunden · Minuten · Sekunden</small></span>
-            </button>
-            <button class="layer" data-layer="date">
-              <span class="layer-preview preview-date">05.08</span>
-              <span><b>Datum</b><small>Wochentag · Tag · Monat</small></span>
-            </button>
-            <button class="layer" data-layer="weather">
-              <span class="layer-preview preview-weather">☁ 24°</span>
-              <span><b>Wetter</b><small>Live-Anzeige · Temperatur</small></span>
-            </button>
-            <button class="layer" data-layer="metrics">
-              <span class="layer-preview preview-steps">◉ 6248</span>
-              <span><b>Aktivität</b><small>Schritte · Puls · Kalorien</small></span>
-            </button>
-            <button class="layer" data-layer="battery">
-              <span class="layer-preview preview-battery">⚡ 84%</span>
-              <span><b>Akku</b><small>Batteriestatus</small></span>
-            </button>
-          </aside>
-
-          <div class="editor-stage">
-            <div class="stage-label" id="stageLabel">Gesamtansicht</div>
-            <div class="editor-watch-v8" id="editorWatch" data-active="all">
-              <iframe
-                class="studio-watchframe-iframe"
-                id="studioWatchframe"
-                src="watchface/index.html"
-                title="TILSMEE V8 WatchFace Studio Vorschau"
-                loading="eager"
-                scrolling="no"></iframe>
-              <div class="studio-watch-overlay" id="studioWatchOverlay" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <div class="studio-copy reveal">
-        <p class="eyebrow">WATCHFACE STUDIO</p>
-        <h2>Dein Design wird zum funktionierenden Zifferblatt.</h2>
-        <p>
-          Eine echte V8-Live-Vorschau mit klar getrennten Ebenen, direkter Kontrolle
-          und einem sauberen Exportworkflow.
-        </p>
-        <ul>
-          <li>Live-Vorschau am Computer</li>
-          <li>Eigene Bilder und Hintergründe</li>
-          <li>Uhrzeit, Sekunden, Datum, Wetter, Schritte, Puls, Kalorien und Akku</li>
-          <li>Export für kompatible Smartwatches</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="panel roadmap" id="roadmap">
-      <div class="section-head reveal">
-        <p class="eyebrow">ROADMAP</p>
-        <h2>TILSMEE entsteht Schritt für Schritt.</h2>
-      </div>
-
-      <div class="timeline">
-        <button class="timeline-row timeline-action reveal" type="button" data-roadmap="homepage" aria-label="Homepage und Markenauftritt öffnen">
-          <span>01</span>
-          <div><h3>Homepage und Markenauftritt</h3><p>Die öffentliche Grundlage für das gesamte TILSMEE-System.</p></div>
-          <small class="state-active">AKTIV</small>
-          <i class="timeline-open" aria-hidden="true">↗</i>
-        </button>
-        <button class="timeline-row timeline-action reveal" type="button" data-roadmap="studio" aria-label="Zum WatchFace Studio">
-          <span>02</span>
-          <div><h3>WatchFace Studio</h3><p>Editor, Ebenen, Live-Vorschau und Export.</p></div>
-          <small>IN ENTWICKLUNG</small>
-          <i class="timeline-open" aria-hidden="true">↗</i>
-        </button>
-        <button class="timeline-row timeline-action reveal" type="button" data-roadmap="ai" aria-label="Persönliche KI Zukunftsvision öffnen">
-          <span>03</span>
-          <div><h3>Persönliche KI</h3><p>Sprache, Wissen, Projekte und Geräte in einer Anwendung.</p></div>
-          <small>GEPLANT</small>
-          <i class="timeline-open" aria-hidden="true">↗</i>
-        </button>
-      </div>
-
-      <div class="roadmap-modal" id="roadmapModal" aria-hidden="true">
-        <button class="roadmap-modal-close" id="roadmapModalClose" type="button" aria-label="Roadmap-Ansicht schließen">×</button>
-        <div class="roadmap-modal-inner" id="roadmapModalInner"></div>
-      </div>
-    </section>
-
-    <section class="panel contact" id="kontakt">
-      <div class="contact-box reveal">
-        <div class="contact-symbol">
-          <img src="brain-master.png" alt="">
-          <span class="core-dot"></span>
-        </div>
-
-        <div class="contact-lockup">
-          <img src="tilsmee-wordmark.png" alt="TILSMEE">
-          <span class="ai">ai</span>
-        </div>
-
-        <h2>Die Entwicklung läuft.</h2>
-        <p>Neue Funktionen, Tests und Fortschritte werden hier sichtbar gemacht.</p>
-        <a class="button button-primary" href="mailto:kontakt@tilsmee.de">Kontakt aufnehmen</a>
-      </div>
-
-      <footer>
-        <div>
-          <strong>© 2026 TILSMEE. Alle Rechte vorbehalten.</strong>
-          <small>Entwickelt von Markus Smeets · Homepage 1.1.0</small>
-        </div>
-        <nav>
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="https://github.com/Tilsmee-ai/tilsmee-ai.github.io" target="_blank" rel="noopener">GitHub</a>
-        </nav>
-      </footer>
-    </section>
-  </main>
-
-  <div class="phone-zoom-backdrop" id="phoneZoomBackdrop" aria-hidden="true">
-    <button class="phone-zoom-close" id="phoneZoomClose" type="button" aria-label="Smartphone-Detailansicht schließen">×</button>
-    <div class="phone-zoom-stage" id="phoneZoomStage" role="dialog" aria-modal="true" aria-label="TILSMEE Smartphone Detailansicht">
-      <div class="phone-zoom-label">ZUKUNFTSVISION · DETAILANSICHT</div>
-      <div id="phoneZoomMount"></div>
+    <div class="weather top-info">
+      <svg viewBox="0 0 90 65" aria-hidden="true">
+        <circle class="sun" cx="59" cy="19" r="10"/>
+        <path class="ray" d="M59 1v9M59 28v9M41 19h9M68 19h9M46 6l6 6M66 26l6 6M72 6l-6 6"/>
+        <path class="cloud" d="M19 54h49a13 13 0 0 0 0-26h-2A20 20 0 0 0 29 31a15 15 0 0 0-10 23z"/>
+      </svg>
+      <span id="temperature">24°C</span>
     </div>
-  </div>
 
-  <div class="watch-zoom-backdrop" id="watchZoomBackdrop" aria-hidden="true">
-    <button class="phone-zoom-close" id="watchZoomClose" type="button" aria-label="Smartwatch-Detailansicht schließen">×</button>
-    <div class="watch-zoom-stage" role="dialog" aria-modal="true" aria-label="TILSMEE Smartwatch Detailansicht">
-      <div class="phone-zoom-label">ZUKUNFTSVISION · DETAILANSICHT</div>
-      <div id="watchZoomMount"></div>
+    <div class="battery top-info">
+      <svg viewBox="0 0 100 55" aria-hidden="true">
+        <rect x="8" y="7" width="78" height="41" rx="5"/>
+        <rect x="88" y="18" width="6" height="18" rx="2"/>
+        <path d="M20 18h54M20 27.5h54M20 37h54"/>
+      </svg>
+      <span id="batteryValue">100%</span>
     </div>
-  </div>
 
-
-  <div class="pc-zoom-backdrop" id="pcZoomBackdrop" aria-hidden="true">
-    <button class="pc-zoom-close" id="pcZoomClose" type="button" aria-label="PC-Detailansicht schließen">×</button>
-    <div class="pc-zoom-stage" role="dialog" aria-modal="true" aria-label="TILSMEE PC Detailansicht">
-      <div class="pc-zoom-label">ZUKUNFTSVISION · DETAILANSICHT</div>
-      <div id="pcZoomMount"></div>
+    <div class="time-row">
+      <span id="time">10:09</span><span class="seconds" id="seconds">36</span>
     </div>
-  </div>
 
+    <div class="divider" aria-hidden="true"></div>
 
-  <div class="auto-zoom-backdrop" id="autoZoomBackdrop" aria-hidden="true">
-    <button class="auto-zoom-close" id="autoZoomClose" type="button" aria-label="Infotainment-Detailansicht schließen">×</button>
-    <div class="auto-zoom-stage" role="dialog" aria-modal="true" aria-label="TILSMEE Auto-Infotainment Detailansicht">
-      <div class="auto-zoom-label">ZUKUNFTSVISION · INFOTAINMENT-FOKUS</div>
-      <div id="autoZoomMount"></div>
+    <div class="date-row">
+      <span id="weekday">FREITAG</span>
+      <strong id="day">15</strong>
+      <span id="monthYear">MAI 2025</span>
     </div>
-  </div>
 
-  <script src="script.js"></script></body>
+    <div class="metrics">
+      <div class="metric">
+        <svg class="metric-icon steps-icon" viewBox="0 0 64 64" aria-hidden="true">
+          <g transform="rotate(-18 32 32)">
+            <ellipse cx="22" cy="19" rx="8" ry="13"/><circle cx="14" cy="8" r="3"/><circle cx="20" cy="5" r="3"/><circle cx="26" cy="6" r="3"/>
+            <ellipse cx="43" cy="42" rx="8" ry="13"/><circle cx="36" cy="30" r="3"/><circle cx="42" cy="28" r="3"/><circle cx="48" cy="30" r="3"/>
+          </g>
+        </svg>
+        <div><strong id="steps">8753</strong><small>SCHRITTE</small></div>
+      </div>
+      <div class="metric">
+        <svg class="metric-icon heart-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 54C11 39 6 30 8 20 10 7 27 5 32 17 37 5 54 7 56 20c2 10-3 19-24 34z"/></svg>
+        <div><strong id="pulse">72</strong><small>PULS</small></div>
+      </div>
+      <div class="metric">
+        <svg class="metric-icon fire-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 5c4 13-8 16-2 28 2-8 9-10 10-19 11 10 16 20 12 31-4 11-14 16-24 14C16 57 8 48 10 36c2-10 10-16 17-25-1 10 2 14 7 17 3-8-3-13 0-23z"/></svg>
+        <div><strong id="kcal">456</strong><small>KCAL</small></div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <div class="wordmark"><span class="tils">TILS</span><span class="mee">MEE</span></div>
+      <div class="tagline"><i></i><span>DEIN KOMPETENTER KI-ASSISTENT</span><i></i></div>
+    </div>
+
+    <div class="circuit" aria-hidden="true">
+      <svg viewBox="0 0 720 180" preserveAspectRatio="none">
+        <g id="circuitLines"></g>
+      </svg>
+    </div>
+  </section>
+</main>
+<script src="watchface.js"></script>
+</body>
 </html>
